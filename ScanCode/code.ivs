@@ -1,0 +1,2728 @@
+<?xml version="1.0"?>
+<!--  Friday, September 05, 2025 11:36:33  -->
+
+<Investigation
+	Version="7020707"
+	Lock="0"
+	Pwd=""
+	SpcReportEveryNRuns="0"
+	SpcReportFile="SpcReport.txt">
+<Variables>
+<Var
+	RtName="count"
+	RtType="1"
+	RtId="213118208"
+	ValType="258">
+<Obj
+	Type="3"
+	Val="1"
+/>
+</Var>
+<Var
+	RtName="code"
+	RtType="1"
+	RtId="213116440"
+	ValType="259">
+<Obj
+	Type="4"
+	Val="C86E08F4644C364WZM34062006GLTLL0FLNJZN8QM53366005M532660010F/G86C00081410/006/DM1436100N8Q/000/8SSW11A40386T1SA4921NHH23SC86E08F4644C                                               "
+/>
+</Var>
+</Variables>
+<BgScripts>
+<Script
+	Name="BgScriptA"
+/>
+<Script
+	Name="BgScriptB"
+/>
+<Script
+	Name="BgScriptC"
+/>
+<Script
+	Name="BgScriptD"
+/>
+<Script
+	Name="BgScriptE"
+/>
+</BgScripts>
+<Calibrations
+/>
+<FileIoMgr>
+<FileIo
+	RtId="212469120"
+/>
+<FileIo
+	RtId="212467872"
+/>
+<FileIo
+	RtId="212466624"
+/>
+<FileIo
+	RtId="212470368"
+/>
+<FileIo
+	RtId="212469432"
+/>
+<FileIo
+	RtId="212467248"
+/>
+<FileIo
+	RtId="212469744"
+/>
+<FileIo
+	RtId="212470056"
+/>
+<FileIo
+	RtId="212466936"
+/>
+<FileIo
+	RtId="212875360"
+/>
+</FileIoMgr>
+<SerialIoMgr>
+<SerialIo
+	BaudRate="9600"
+	DataBits="8"
+	Parity="0"
+	StopBits="0"
+	FlowControl="0"
+/>
+<SerialIo
+	BaudRate="9600"
+	DataBits="8"
+	Parity="0"
+	StopBits="0"
+	FlowControl="0"
+/>
+<SerialIo
+	BaudRate="9600"
+	DataBits="8"
+	Parity="0"
+	StopBits="0"
+	FlowControl="0"
+/>
+<SerialIo
+	BaudRate="9600"
+	DataBits="8"
+	Parity="0"
+	StopBits="0"
+	FlowControl="0"
+/>
+<SerialIo
+	BaudRate="9600"
+	DataBits="8"
+	Parity="0"
+	StopBits="0"
+	FlowControl="0"
+/>
+<SerialIo
+	BaudRate="9600"
+	DataBits="8"
+	Parity="0"
+	StopBits="0"
+	FlowControl="0"
+/>
+<SerialIo
+	BaudRate="9600"
+	DataBits="8"
+	Parity="0"
+	StopBits="0"
+	FlowControl="0"
+/>
+<SerialIo
+	BaudRate="9600"
+	DataBits="8"
+	Parity="0"
+	StopBits="0"
+	FlowControl="0"
+/>
+</SerialIoMgr>
+<UdpIoMgr
+/>
+<TcpIoMgr
+/>
+<ModbusIoMgr
+/>
+<Alignments
+/>
+<CLMngr
+/>
+<GeFanucMgr
+/>
+<HmiIoMgr
+	addr="127.0.0.1"
+	port="5085"
+	run="0"
+/>
+<ProfinetMgr
+	name=""
+	guid=""
+	ip=""
+/>
+<Subroutines>
+<Sub
+	RtName="Main"
+	RtType="5"
+	RtId="200898280"
+	ParentInstr="0"
+	InstrType="2"
+	Collapsed="0"
+	ExecFlags="0">
+<Inputs
+/>
+<Outputs
+/>
+<Params
+/>
+<Instructions>
+<Instruction
+	RtName="imgA"
+	RtType="5"
+	RtId="213089584"
+	ParentInstr="0"
+	InstrType="3"
+	Collapsed="0"
+	ImgSrcType="4"
+	Calibration="0"
+	RestoreCalibration="0"
+	DisplayGrid="0"
+	GridSize="50"
+	DisplayOrigin="0"
+	PalType="1"
+	ShowRawPixels="1"
+	Zoom="0.5"
+	WndPosLeft="118"
+	WndPosTop="97"
+	WndPosRight="528"
+	WndPosBottom="540"
+	WndPosShowCmd="1"
+	WndPosPtScrollX="0"
+	WndPosPtScrollY="0"
+	WndPosSizeScrollX="389"
+	WndPosSizeScrollY="373"
+	WndToolbarVisible="1"
+	bLogImages="0"
+	bDisableNumFile="0"
+	bLogCurIndex="0"
+	bLogMaxIndex="100"
+	strLogDir="C:\ProgramData\Teledyne DALSA\Sherlock\images"
+	strLogPrefix="imgA-log-"
+	strLogExt="BMP"
+	bLogWrap="1"
+	bFtpLogImages="0"
+	bDisableNumFtp="0"
+	nFtpLogCurIndex="-1"
+	nFtpLogMaxIndex="100"
+	strFtpLogDir="/Public"
+	strFtpLogPrefix="imgA-ftp-log-"
+	strFtpLogExt="JPG"
+	bFtpLogWrap="1"
+	bFtpLogOverlay="0"
+	strFtpLogServer="user:password@ftpServer or ftpServer"
+	bAcqHWTrigger="0"
+	bAcqTimeout="5000"
+	RealBpp="12"
+	SrcBpp="12"
+	HwAcqTimeout="-1"
+	AcqTimeoutNoErrSkipExec="0">
+<Inputs>
+<id0
+	RtId="212614984"
+	Connected="0">
+<Obj
+	Type="1"
+	Val="1"
+/>
+</id0>
+</Inputs>
+<Outputs>
+<id0
+	RtId="212940920"
+	ConnVar="0"
+	Watch="0"
+	SpcOn="0"
+	Hidden="0"
+	Lmark="0">
+<Obj
+	Type="3"
+	Val="3.7142000198364258"
+/>
+<Annot
+	Type="6"
+	X="-1"
+	Y="-1"
+	Clr="0"
+	Text="acq time: 3.71"
+	Display="1"
+	Highlight="0"
+	So="0">
+<Coord
+	Size="0"
+	Value=""
+/>
+</Annot>
+</id0>
+<id1
+	RtId="212096800"
+	ConnVar="0"
+	Watch="0"
+	SpcOn="0"
+	Hidden="0"
+	Lmark="0">
+<Obj
+	Type="1"
+	Val="1"
+/>
+<Annot
+	Type="6"
+	X="-1"
+	Y="-1"
+	Clr="0"
+	Text="acq status: True"
+	Display="1"
+	Highlight="0"
+	So="0">
+<Coord
+	Size="0"
+	Value=""
+/>
+</Annot>
+</id1>
+<id2
+	RtId="212097424"
+	ConnVar="0"
+	Watch="0"
+	SpcOn="0"
+	Hidden="0"
+	Lmark="0">
+<Obj
+	Type="10">
+<Val
+	HdlType="262"
+/>
+</Obj>
+<Annot
+	Type="6"
+	X="-1"
+	Y="-1"
+	Clr="0"
+	Text="image: Handle"
+	Display="1"
+	Highlight="0"
+	So="0">
+<Coord
+	Size="0"
+	Value=""
+/>
+</Annot>
+</id2>
+</Outputs>
+<Params
+/>
+<ImgSrc
+	File="F:\vsProject\ScanCode\ScanCode\121.jpg"
+/>
+<Image
+	Width="780"
+	Height="748"
+	Attr="1"
+/>
+<Proxy
+	RtName="[None]"
+	RtType="7"
+	RtId="212568816"
+	ValType="1027">
+<Obj
+	Type="10">
+<Val
+	HdlType="0"
+/>
+</Obj>
+</Proxy>
+</Instruction>
+<Instruction
+	RtName="Begin"
+	RtType="5"
+	RtId="212586440"
+	ParentInstr="213089584"
+	InstrType="4"
+	Collapsed="0"
+	ParentSo="213089584"
+/>
+<Instruction
+	RtName="RectA"
+	RtType="5"
+	RtId="212440584"
+	ParentInstr="0"
+	InstrType="1"
+	Collapsed="0"
+	RoiType="67109120"
+	Interpolate="1"
+	RoiLocked="0"
+	ShowOutline="1"
+	ShowAnnot="1"
+	HdrLocked="0"
+	HdrLine="0"
+	HdrAnchorCoord="0"
+	HdrLocX="53"
+	HdrLocY="25"
+	WriteChanges="1"
+	Locked="0"
+	Selected="0"
+	Tolerance="0"
+	Cond="FALSE"
+	RoiSoRtId="213089584"
+	RoiAlignId="0">
+<Coords
+	Rotation="0"
+	Elements="0">
+<Val
+	Size="2"
+	Value="(48,30),(738,730)"
+/>
+</Coords>
+<OrgCoords
+	Rotation="0"
+	Elements="0">
+<Val
+	Size="2"
+	Value="(48,30),(738,730)"
+/>
+</OrgCoords>
+<Preprocessors
+/>
+<Algorithms>
+<Algorithm
+	AlgIndex="0"
+	RtName="algA"
+	RtType="5"
+	RtId="212477432"
+	ParentInstr="212440584"
+	InstrType="19"
+	Collapsed="0"
+	ProxyHandleRtId="0"
+	SoRtId="212440584"
+	Tag="code-RectA-algA"
+	ImgProcId="_QuickBarcode_">
+<Inputs
+/>
+<Outputs>
+<id500
+	RtId="212098912"
+	ConnVar="213118208"
+	Watch="0"
+	SpcOn="0"
+	Hidden="0"
+	Lmark="0">
+<Obj
+	Type="3"
+	Val="1"
+/>
+<Annot
+	Type="6"
+	X="-1"
+	Y="-1"
+	Clr="0"
+	Text="found barcodes: 1.00"
+	Display="1"
+	Highlight="0"
+	So="0">
+<Coord
+	Size="0"
+	Value=""
+/>
+</Annot>
+</id500>
+<id501
+	RtId="213159912"
+	ConnVar="0"
+	Watch="0"
+	SpcOn="0"
+	Hidden="0"
+	Lmark="0">
+<Obj
+	Type="3"
+	Val="180"
+/>
+<Annot
+	Type="6"
+	X="-1"
+	Y="-1"
+	Clr="0"
+	Text="read count[0]: 180.00"
+	Display="1"
+	Highlight="0"
+	So="0">
+<Coord
+	Size="0"
+	Value=""
+/>
+</Annot>
+</id501>
+<id502
+	RtId="213160536"
+	ConnVar="213116440"
+	Watch="0"
+	SpcOn="0"
+	Hidden="0"
+	Lmark="0">
+<Obj
+	Type="4"
+	Val="C86E08F4644C364WZM34062006GLTLL0FLNJZN8QM53366005M532660010F/G86C00081410/006/DM1436100N8Q/000/8SSW11A40386T1SA4921NHH23SC86E08F4644C                                               "
+/>
+<Annot
+	Type="6"
+	X="-1"
+	Y="-1"
+	Clr="0"
+	Text="read string[0]: C86E08F4644C364WZM34062006GLTLL0FLNJZN8QM53366005M532660010F/G86C00081410/006/DM1436100N8Q/000/8SSW11A40386T1SA4921NHH23SC86E08F4644C                                               "
+	Display="1"
+	Highlight="0"
+	So="0">
+<Coord
+	Size="0"
+	Value=""
+/>
+</Annot>
+</id502>
+<id503
+	RtId="213161160"
+	ConnVar="0"
+	Watch="0"
+	SpcOn="0"
+	Hidden="0"
+	Lmark="0">
+<Obj
+	Type="4098">
+<Val
+	Size="181"
+	Value="67,56,54,69,48,56,70,52,54,52,52,67,51,54,52,87,90,77,51,52,48,54,50,48,48,54,71,76,84,76,76,48,70,76,78,74,90,78,56,81,77,53,51,51,54,54,48,48,53,77,53,51,50,54,54,48,48,49,48,70,47,71,56,54,67,48,48,48,56,49,52,49,48,47,48,48,54,47,68,77,49,52,51,54,49,48,48,78,56,81,47,48,48,48,47,56,83,83,87,49,49,65,52,48,51,56,54,84,49,83,65,52,57,50,49,78,72,72,50,51,83,67,56,54,69,48,56,70,52,54,52,52,67,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,0"
+/>
+</Obj>
+<Annot
+	Type="6"
+	X="-1"
+	Y="-1"
+	Clr="0"
+	Text="read data[0]: ((67.00), ...) [181]"
+	Display="1"
+	Highlight="0"
+	So="0">
+<Coord
+	Size="0"
+	Value=""
+/>
+</Annot>
+</id503>
+<id504
+	RtId="213161784"
+	ConnVar="0"
+	Watch="0"
+	SpcOn="0"
+	Hidden="0"
+	Lmark="0">
+<Obj
+	Type="4"
+	Val="Data Matrix"
+/>
+<Annot
+	Type="6"
+	X="-1"
+	Y="-1"
+	Clr="0"
+	Text="symbology[0]: Data Matrix"
+	Display="1"
+	Highlight="0"
+	So="0">
+<Coord
+	Size="0"
+	Value=""
+/>
+</Annot>
+</id504>
+<id505
+	RtId="213162408"
+	ConnVar="0"
+	Watch="0"
+	SpcOn="0"
+	Hidden="0"
+	Lmark="0">
+<Obj
+	Type="3"
+	Val="1"
+/>
+<Annot
+	Type="6"
+	X="-1"
+	Y="-1"
+	Clr="0"
+	Text="symbology modifier[0] modifier: 1.00"
+	Display="1"
+	Highlight="0"
+	So="0">
+<Coord
+	Size="0"
+	Value=""
+/>
+</Annot>
+</id505>
+<id506
+	RtId="213163032"
+	ConnVar="0"
+	Watch="0"
+	SpcOn="0"
+	Hidden="0"
+	Lmark="0">
+<Obj
+	Type="3"
+	Val="2"
+/>
+<Annot
+	Type="6"
+	X="-1"
+	Y="-1"
+	Clr="0"
+	Text="read time[0]: 2.00"
+	Display="1"
+	Highlight="0"
+	So="0">
+<Coord
+	Size="0"
+	Value=""
+/>
+</Annot>
+</id506>
+<id507
+	RtId="213163656"
+	ConnVar="0"
+	Watch="0"
+	SpcOn="0"
+	Hidden="0"
+	Lmark="0">
+<Obj
+	Type="3"
+	Val="100"
+/>
+<Annot
+	Type="6"
+	X="-1"
+	Y="-1"
+	Clr="0"
+	Text="matrix quality[0]: 100.00"
+	Display="1"
+	Highlight="0"
+	So="0">
+<Coord
+	Size="0"
+	Value=""
+/>
+</Annot>
+</id507>
+<id508
+	RtId="213164280"
+	ConnVar="0"
+	Watch="0"
+	SpcOn="0"
+	Hidden="0"
+	Lmark="0">
+<Obj
+	Type="3"
+	Val="318"
+/>
+<Annot
+	Type="6"
+	X="-1"
+	Y="-1"
+	Clr="0"
+	Text="matrix symbol width[0]: 318.00"
+	Display="1"
+	Highlight="0"
+	So="0">
+<Coord
+	Size="0"
+	Value=""
+/>
+</Annot>
+</id508>
+<id509
+	RtId="213164904"
+	ConnVar="0"
+	Watch="0"
+	SpcOn="0"
+	Hidden="0"
+	Lmark="0">
+<Obj
+	Type="3"
+	Val="317"
+/>
+<Annot
+	Type="6"
+	X="-1"
+	Y="-1"
+	Clr="0"
+	Text="matrix symbol height[0]: 317.00"
+	Display="1"
+	Highlight="0"
+	So="0">
+<Coord
+	Size="0"
+	Value=""
+/>
+</Annot>
+</id509>
+<id510
+	RtId="213165528"
+	ConnVar="0"
+	Watch="0"
+	SpcOn="0"
+	Hidden="0"
+	Lmark="0">
+<Obj
+	Type="3"
+	Val="44"
+/>
+<Annot
+	Type="6"
+	X="-1"
+	Y="-1"
+	Clr="0"
+	Text="matrix cell columns[0]: 44.00"
+	Display="1"
+	Highlight="0"
+	So="0">
+<Coord
+	Size="0"
+	Value=""
+/>
+</Annot>
+</id510>
+<id511
+	RtId="213166152"
+	ConnVar="0"
+	Watch="0"
+	SpcOn="0"
+	Hidden="0"
+	Lmark="0">
+<Obj
+	Type="3"
+	Val="44"
+/>
+<Annot
+	Type="6"
+	X="-1"
+	Y="-1"
+	Clr="0"
+	Text="matrix cell rows[0]: 44.00"
+	Display="1"
+	Highlight="0"
+	So="0">
+<Coord
+	Size="0"
+	Value=""
+/>
+</Annot>
+</id511>
+<id512
+	RtId="213166776"
+	ConnVar="0"
+	Watch="0"
+	SpcOn="0"
+	Hidden="0"
+	Lmark="0">
+<Obj
+	Type="3"
+	Val="0"
+/>
+<Annot
+	Type="6"
+	X="-1"
+	Y="-1"
+	Clr="0"
+	Text="matrix is light on dark[0]: 0.00"
+	Display="1"
+	Highlight="0"
+	So="0">
+<Coord
+	Size="0"
+	Value=""
+/>
+</Annot>
+</id512>
+<id513
+	RtId="213167400"
+	ConnVar="0"
+	Watch="0"
+	SpcOn="0"
+	Hidden="0"
+	Lmark="0">
+<Obj
+	Type="3"
+	Val="0"
+/>
+<Annot
+	Type="6"
+	X="-1"
+	Y="-1"
+	Clr="0"
+	Text="matrix is flipped[0]: 0.00"
+	Display="1"
+	Highlight="0"
+	So="0">
+<Coord
+	Size="0"
+	Value=""
+/>
+</Annot>
+</id513>
+<id514
+	RtId="213168064"
+	ConnVar="0"
+	Watch="0"
+	SpcOn="0"
+	Hidden="0"
+	Lmark="0">
+<Obj
+	Type="6"
+	Val="227,532"
+/>
+<Annot
+	Type="1"
+	X="241"
+	Y="518"
+	Clr="0"
+	Text="matrix center[0]: (227.00, 532.00)"
+	Display="1"
+	Highlight="0"
+	So="213089584">
+<Coord
+	Size="2"
+	Value="227,532"
+/>
+</Annot>
+</id514>
+<id515
+	RtId="213173896"
+	ConnVar="0"
+	Watch="0"
+	SpcOn="0"
+	Hidden="0"
+	Lmark="0">
+<Obj
+	Type="4100">
+<Val
+	Size="4"
+	Value="(67,375),(386,373),(386,690),(69,693)"
+/>
+</Obj>
+<Annot
+	Type="7"
+	X="81"
+	Y="361"
+	Clr="0"
+	Text="matrix corners[0]: ((67.00, 375.00), ...) [4]"
+	Display="1"
+	Highlight="0"
+	So="213089584">
+<Coord
+	Size="8"
+	Value="67,375,386,373,386,690,69,693"
+/>
+</Annot>
+</id515>
+<id516
+	RtId="213174544"
+	ConnVar="0"
+	Watch="0"
+	SpcOn="0"
+	Hidden="1"
+	Lmark="0">
+<Obj
+	Type="3"
+	Val="0"
+/>
+<Annot
+	Type="6"
+	X="-1"
+	Y="-1"
+	Clr="0"
+	Text="matrix contrast grade[0]: 0.00"
+	Display="1"
+	Highlight="0"
+	So="0">
+<Coord
+	Size="0"
+	Value=""
+/>
+</Annot>
+</id516>
+<id517
+	RtId="213172600"
+	ConnVar="0"
+	Watch="0"
+	SpcOn="0"
+	Hidden="1"
+	Lmark="0">
+<Obj
+	Type="3"
+	Val="0"
+/>
+<Annot
+	Type="6"
+	X="-1"
+	Y="-1"
+	Clr="0"
+	Text="matrix contrast value[0]: 0.00"
+	Display="1"
+	Highlight="0"
+	So="0">
+<Coord
+	Size="0"
+	Value=""
+/>
+</Annot>
+</id517>
+<id518
+	RtId="213169360"
+	ConnVar="0"
+	Watch="0"
+	SpcOn="0"
+	Hidden="1"
+	Lmark="0">
+<Obj
+	Type="3"
+	Val="0"
+/>
+<Annot
+	Type="6"
+	X="-1"
+	Y="-1"
+	Clr="0"
+	Text="matrix print growth grade[0]: 0.00"
+	Display="1"
+	Highlight="0"
+	So="0">
+<Coord
+	Size="0"
+	Value=""
+/>
+</Annot>
+</id518>
+<id519
+	RtId="213168712"
+	ConnVar="0"
+	Watch="0"
+	SpcOn="0"
+	Hidden="1"
+	Lmark="0">
+<Obj
+	Type="3"
+	Val="0"
+/>
+<Annot
+	Type="6"
+	X="-1"
+	Y="-1"
+	Clr="0"
+	Text="matrix print growth value[0]: 0.00"
+	Display="1"
+	Highlight="0"
+	So="0">
+<Coord
+	Size="0"
+	Value=""
+/>
+</Annot>
+</id519>
+<id520
+	RtId="213171952"
+	ConnVar="0"
+	Watch="0"
+	SpcOn="0"
+	Hidden="1"
+	Lmark="0">
+<Obj
+	Type="3"
+	Val="0"
+/>
+<Annot
+	Type="6"
+	X="-1"
+	Y="-1"
+	Clr="0"
+	Text="matrix axial nonuniformity grade[0]: 0.00"
+	Display="1"
+	Highlight="0"
+	So="0">
+<Coord
+	Size="0"
+	Value=""
+/>
+</Annot>
+</id520>
+<id521
+	RtId="213173248"
+	ConnVar="0"
+	Watch="0"
+	SpcOn="0"
+	Hidden="1"
+	Lmark="0">
+<Obj
+	Type="3"
+	Val="0"
+/>
+<Annot
+	Type="6"
+	X="-1"
+	Y="-1"
+	Clr="0"
+	Text="matrix axial nonuniformity value[0]: 0.00"
+	Display="1"
+	Highlight="0"
+	So="0">
+<Coord
+	Size="0"
+	Value=""
+/>
+</Annot>
+</id521>
+<id522
+	RtId="213175192"
+	ConnVar="0"
+	Watch="0"
+	SpcOn="0"
+	Hidden="1"
+	Lmark="0">
+<Obj
+	Type="3"
+	Val="0"
+/>
+<Annot
+	Type="6"
+	X="-1"
+	Y="-1"
+	Clr="0"
+	Text="matrix unused error correction grade[0]: 0.00"
+	Display="1"
+	Highlight="0"
+	So="0">
+<Coord
+	Size="0"
+	Value=""
+/>
+</Annot>
+</id522>
+<id523
+	RtId="213170008"
+	ConnVar="0"
+	Watch="0"
+	SpcOn="0"
+	Hidden="1"
+	Lmark="0">
+<Obj
+	Type="3"
+	Val="0"
+/>
+<Annot
+	Type="6"
+	X="-1"
+	Y="-1"
+	Clr="0"
+	Text="matrix unused error correction value[0]: 0.00"
+	Display="1"
+	Highlight="0"
+	So="0">
+<Coord
+	Size="0"
+	Value=""
+/>
+</Annot>
+</id523>
+<id524
+	RtId="213170656"
+	ConnVar="0"
+	Watch="0"
+	SpcOn="0"
+	Hidden="1"
+	Lmark="0">
+<Obj
+	Type="3"
+	Val="0"
+/>
+<Annot
+	Type="6"
+	X="-1"
+	Y="-1"
+	Clr="0"
+	Text="matrix overall grade[0]: 0.00"
+	Display="1"
+	Highlight="0"
+	So="0">
+<Coord
+	Size="0"
+	Value=""
+/>
+</Annot>
+</id524>
+<id525
+	RtId="213171304"
+	ConnVar="0"
+	Watch="0"
+	SpcOn="0"
+	Hidden="1"
+	Lmark="0">
+<Obj
+	Type="3"
+	Val="0"
+/>
+<Annot
+	Type="6"
+	X="-1"
+	Y="-1"
+	Clr="0"
+	Text="matrix grid nonuniformity grade[0]: 0.00"
+	Display="1"
+	Highlight="0"
+	So="0">
+<Coord
+	Size="0"
+	Value=""
+/>
+</Annot>
+</id525>
+<id526
+	RtId="213181448"
+	ConnVar="0"
+	Watch="0"
+	SpcOn="0"
+	Hidden="1"
+	Lmark="0">
+<Obj
+	Type="3"
+	Val="0"
+/>
+<Annot
+	Type="6"
+	X="-1"
+	Y="-1"
+	Clr="0"
+	Text="matrix grid nonuniformity value[0]: 0.00"
+	Display="1"
+	Highlight="0"
+	So="0">
+<Coord
+	Size="0"
+	Value=""
+/>
+</Annot>
+</id526>
+<id527
+	RtId="213182096"
+	ConnVar="0"
+	Watch="0"
+	SpcOn="0"
+	Hidden="1"
+	Lmark="0">
+<Obj
+	Type="3"
+	Val="0"
+/>
+<Annot
+	Type="6"
+	X="-1"
+	Y="-1"
+	Clr="0"
+	Text="matrix fixed pattern damage grade[0]: 0.00"
+	Display="1"
+	Highlight="0"
+	So="0">
+<Coord
+	Size="0"
+	Value=""
+/>
+</Annot>
+</id527>
+<id528
+	RtId="213191816"
+	ConnVar="0"
+	Watch="0"
+	SpcOn="0"
+	Hidden="1"
+	Lmark="0">
+<Obj
+	Type="3"
+	Val="0"
+/>
+<Annot
+	Type="6"
+	X="-1"
+	Y="-1"
+	Clr="0"
+	Text="matrix modulation grade[0]: 0.00"
+	Display="1"
+	Highlight="0"
+	So="0">
+<Coord
+	Size="0"
+	Value=""
+/>
+</Annot>
+</id528>
+<id529
+	RtId="213191168"
+	ConnVar="0"
+	Watch="0"
+	SpcOn="0"
+	Hidden="1"
+	Lmark="0">
+<Obj
+	Type="3"
+	Val="0"
+/>
+<Annot
+	Type="6"
+	X="-1"
+	Y="-1"
+	Clr="0"
+	Text="matrix scan grade[0]: 0.00"
+	Display="1"
+	Highlight="0"
+	So="0">
+<Coord
+	Size="0"
+	Value=""
+/>
+</Annot>
+</id529>
+<id530
+	RtId="213176264"
+	ConnVar="0"
+	Watch="0"
+	SpcOn="0"
+	Hidden="1"
+	Lmark="0">
+<Obj
+	Type="3"
+	Val="0"
+/>
+<Annot
+	Type="6"
+	X="-1"
+	Y="-1"
+	Clr="0"
+	Text="matrix cell modulation[0]: 0.00"
+	Display="1"
+	Highlight="0"
+	So="0">
+<Coord
+	Size="0"
+	Value=""
+/>
+</Annot>
+</id530>
+<id531
+	RtId="213185984"
+	ConnVar="0"
+	Watch="0"
+	SpcOn="0"
+	Hidden="1"
+	Lmark="0">
+<Obj
+	Type="3"
+	Val="0"
+/>
+<Annot
+	Type="6"
+	X="-1"
+	Y="-1"
+	Clr="0"
+	Text="matrix cell contrast grade[0]: 0.00"
+	Display="1"
+	Highlight="0"
+	So="0">
+<Coord
+	Size="0"
+	Value=""
+/>
+</Annot>
+</id531>
+<id532
+	RtId="213186632"
+	ConnVar="0"
+	Watch="0"
+	SpcOn="0"
+	Hidden="1"
+	Lmark="0">
+<Obj
+	Type="3"
+	Val="0"
+/>
+<Annot
+	Type="6"
+	X="-1"
+	Y="-1"
+	Clr="0"
+	Text="matrix cell contrast value[0]: 0.00"
+	Display="1"
+	Highlight="0"
+	So="0">
+<Coord
+	Size="0"
+	Value=""
+/>
+</Annot>
+</id532>
+<id533
+	RtId="213190520"
+	ConnVar="0"
+	Watch="0"
+	SpcOn="0"
+	Hidden="1"
+	Lmark="0">
+<Obj
+	Type="3"
+	Val="0"
+/>
+<Annot
+	Type="6"
+	X="-1"
+	Y="-1"
+	Clr="0"
+	Text="matrix minimum reflectance grade[0]: 0.00"
+	Display="1"
+	Highlight="0"
+	So="0">
+<Coord
+	Size="0"
+	Value=""
+/>
+</Annot>
+</id533>
+<id534
+	RtId="213182744"
+	ConnVar="0"
+	Watch="0"
+	SpcOn="0"
+	Hidden="1"
+	Lmark="0">
+<Obj
+	Type="3"
+	Val="0"
+/>
+<Annot
+	Type="6"
+	X="-1"
+	Y="-1"
+	Clr="0"
+	Text="matrix minimum reflectance value[0]: 0.00"
+	Display="1"
+	Highlight="0"
+	So="0">
+<Coord
+	Size="0"
+	Value=""
+/>
+</Annot>
+</id534>
+<id601
+	RtId="213178208"
+	ConnVar="0"
+	Watch="0"
+	SpcOn="0"
+	Hidden="1"
+	Lmark="0">
+<Obj
+	Type="4098">
+<Val
+	Size="1"
+	Value="181"
+/>
+</Obj>
+<Annot
+	Type="6"
+	X="-1"
+	Y="-1"
+	Clr="0"
+	Text="read count[]: ((181.00), ...) [1]"
+	Display="1"
+	Highlight="0"
+	So="0">
+<Coord
+	Size="0"
+	Value=""
+/>
+</Annot>
+</id601>
+<id602
+	RtId="213187928"
+	ConnVar="0"
+	Watch="0"
+	SpcOn="0"
+	Hidden="1"
+	Lmark="0">
+<Obj
+	Type="4099">
+<Val
+	Size="1"
+	String0="C86E08F4644C364WZM34062006GLTLL0FLNJZN8QM53366005M532660010F/G86C00081410/006/DM1436100N8Q/000/8SSW11A40386T1SA4921NHH23SC86E08F4644C                                               "
+/>
+</Obj>
+<Annot
+	Type="6"
+	X="-1"
+	Y="-1"
+	Clr="0"
+	Text="read string[]: (C86E08F4644C364WZM34062006GLTLL0FLNJZN8QM53366005M532660010F/G86C00081410/006/DM1436100N8Q/000/8SSW11A40386T1SA4921NHH23SC86E08F4644C                                               , ...) [1]"
+	Display="1"
+	Highlight="0"
+	So="0">
+<Coord
+	Size="0"
+	Value=""
+/>
+</Annot>
+</id602>
+<id603
+	RtId="213187280"
+	ConnVar="0"
+	Watch="0"
+	SpcOn="0"
+	Hidden="1"
+	Lmark="0">
+<Obj
+	Type="4098">
+<Val
+	Size="181"
+	Value="67,56,54,69,48,56,70,52,54,52,52,67,51,54,52,87,90,77,51,52,48,54,50,48,48,54,71,76,84,76,76,48,70,76,78,74,90,78,56,81,77,53,51,51,54,54,48,48,53,77,53,51,50,54,54,48,48,49,48,70,47,71,56,54,67,48,48,48,56,49,52,49,48,47,48,48,54,47,68,77,49,52,51,54,49,48,48,78,56,81,47,48,48,48,47,56,83,83,87,49,49,65,52,48,51,56,54,84,49,83,65,52,57,50,49,78,72,72,50,51,83,67,56,54,69,48,56,70,52,54,52,52,67,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,0"
+/>
+</Obj>
+<Annot
+	Type="6"
+	X="-1"
+	Y="-1"
+	Clr="0"
+	Text="read data[]: ((67.00), ...) [181]"
+	Display="1"
+	Highlight="0"
+	So="0">
+<Coord
+	Size="0"
+	Value=""
+/>
+</Annot>
+</id603>
+<id604
+	RtId="213183392"
+	ConnVar="0"
+	Watch="0"
+	SpcOn="0"
+	Hidden="1"
+	Lmark="0">
+<Obj
+	Type="4099">
+<Val
+	Size="1"
+	String0="Data Matrix"
+/>
+</Obj>
+<Annot
+	Type="6"
+	X="-1"
+	Y="-1"
+	Clr="0"
+	Text="symbology[]: (Data Matrix, ...) [1]"
+	Display="1"
+	Highlight="0"
+	So="0">
+<Coord
+	Size="0"
+	Value=""
+/>
+</Annot>
+</id604>
+<id605
+	RtId="213176912"
+	ConnVar="0"
+	Watch="0"
+	SpcOn="0"
+	Hidden="1"
+	Lmark="0">
+<Obj
+	Type="4098">
+<Val
+	Size="1"
+	Value="1"
+/>
+</Obj>
+<Annot
+	Type="6"
+	X="-1"
+	Y="-1"
+	Clr="0"
+	Text="symbology modifier[]: ((1.00), ...) [1]"
+	Display="1"
+	Highlight="0"
+	So="0">
+<Coord
+	Size="0"
+	Value=""
+/>
+</Annot>
+</id605>
+<id606
+	RtId="213184040"
+	ConnVar="0"
+	Watch="0"
+	SpcOn="0"
+	Hidden="1"
+	Lmark="0">
+<Obj
+	Type="4098">
+<Val
+	Size="1"
+	Value="2"
+/>
+</Obj>
+<Annot
+	Type="6"
+	X="-1"
+	Y="-1"
+	Clr="0"
+	Text="read time[]: ((2.00), ...) [1]"
+	Display="1"
+	Highlight="0"
+	So="0">
+<Coord
+	Size="0"
+	Value=""
+/>
+</Annot>
+</id606>
+<id607
+	RtId="213189872"
+	ConnVar="0"
+	Watch="0"
+	SpcOn="0"
+	Hidden="1"
+	Lmark="0">
+<Obj
+	Type="4098">
+<Val
+	Size="1"
+	Value="100"
+/>
+</Obj>
+<Annot
+	Type="6"
+	X="-1"
+	Y="-1"
+	Clr="0"
+	Text="matrix quality[]: ((100.00), ...) [1]"
+	Display="1"
+	Highlight="0"
+	So="0">
+<Coord
+	Size="0"
+	Value=""
+/>
+</Annot>
+</id607>
+<id608
+	RtId="213177560"
+	ConnVar="0"
+	Watch="0"
+	SpcOn="0"
+	Hidden="1"
+	Lmark="0">
+<Obj
+	Type="4098">
+<Val
+	Size="1"
+	Value="318"
+/>
+</Obj>
+<Annot
+	Type="6"
+	X="-1"
+	Y="-1"
+	Clr="0"
+	Text="matrix symbol width[]: ((318.00), ...) [1]"
+	Display="1"
+	Highlight="0"
+	So="0">
+<Coord
+	Size="0"
+	Value=""
+/>
+</Annot>
+</id608>
+<id609
+	RtId="213178856"
+	ConnVar="0"
+	Watch="0"
+	SpcOn="0"
+	Hidden="1"
+	Lmark="0">
+<Obj
+	Type="4098">
+<Val
+	Size="1"
+	Value="317"
+/>
+</Obj>
+<Annot
+	Type="6"
+	X="-1"
+	Y="-1"
+	Clr="0"
+	Text="matrix symbol height[]: ((317.00), ...) [1]"
+	Display="1"
+	Highlight="0"
+	So="0">
+<Coord
+	Size="0"
+	Value=""
+/>
+</Annot>
+</id609>
+<id610
+	RtId="213184688"
+	ConnVar="0"
+	Watch="0"
+	SpcOn="0"
+	Hidden="1"
+	Lmark="0">
+<Obj
+	Type="4098">
+<Val
+	Size="1"
+	Value="44"
+/>
+</Obj>
+<Annot
+	Type="6"
+	X="-1"
+	Y="-1"
+	Clr="0"
+	Text="matrix cell columns[]: ((44.00), ...) [1]"
+	Display="1"
+	Highlight="0"
+	So="0">
+<Coord
+	Size="0"
+	Value=""
+/>
+</Annot>
+</id610>
+<id611
+	RtId="213189224"
+	ConnVar="0"
+	Watch="0"
+	SpcOn="0"
+	Hidden="1"
+	Lmark="0">
+<Obj
+	Type="4098">
+<Val
+	Size="1"
+	Value="44"
+/>
+</Obj>
+<Annot
+	Type="6"
+	X="-1"
+	Y="-1"
+	Clr="0"
+	Text="matrix cell rows[]: ((44.00), ...) [1]"
+	Display="1"
+	Highlight="0"
+	So="0">
+<Coord
+	Size="0"
+	Value=""
+/>
+</Annot>
+</id611>
+<id612
+	RtId="213188576"
+	ConnVar="0"
+	Watch="0"
+	SpcOn="0"
+	Hidden="1"
+	Lmark="0">
+<Obj
+	Type="4098">
+<Val
+	Size="1"
+	Value="0"
+/>
+</Obj>
+<Annot
+	Type="6"
+	X="-1"
+	Y="-1"
+	Clr="0"
+	Text="matrix is light on dark[]: ((0.00), ...) [1]"
+	Display="1"
+	Highlight="0"
+	So="0">
+<Coord
+	Size="0"
+	Value=""
+/>
+</Annot>
+</id612>
+<id613
+	RtId="213179504"
+	ConnVar="0"
+	Watch="0"
+	SpcOn="0"
+	Hidden="1"
+	Lmark="0">
+<Obj
+	Type="4098">
+<Val
+	Size="1"
+	Value="0"
+/>
+</Obj>
+<Annot
+	Type="6"
+	X="-1"
+	Y="-1"
+	Clr="0"
+	Text="matrix is flipped[]: ((0.00), ...) [1]"
+	Display="1"
+	Highlight="0"
+	So="0">
+<Coord
+	Size="0"
+	Value=""
+/>
+</Annot>
+</id613>
+<id614
+	RtId="213180152"
+	ConnVar="0"
+	Watch="0"
+	SpcOn="0"
+	Hidden="1"
+	Lmark="0">
+<Obj
+	Type="4100">
+<Val
+	Size="1"
+	Value="(227,532)"
+/>
+</Obj>
+<Annot
+	Type="7"
+	X="241"
+	Y="533"
+	Clr="0"
+	Text="matrix center[]: ((227.00, 532.00), ...) [1]"
+	Display="1"
+	Highlight="0"
+	So="213089584">
+<Coord
+	Size="2"
+	Value="227,532"
+/>
+</Annot>
+</id614>
+<id615
+	RtId="213180800"
+	ConnVar="0"
+	Watch="0"
+	SpcOn="0"
+	Hidden="1"
+	Lmark="0">
+<Obj
+	Type="4100">
+<Val
+	Size="4"
+	Value="(67,375),(386,373),(386,690),(69,693)"
+/>
+</Obj>
+<Annot
+	Type="7"
+	X="81"
+	Y="376"
+	Clr="0"
+	Text="matrix corners[]: ((67.00, 375.00), ...) [4]"
+	Display="1"
+	Highlight="0"
+	So="213089584">
+<Coord
+	Size="8"
+	Value="67,375,386,373,386,690,69,693"
+/>
+</Annot>
+</id615>
+</Outputs>
+<Params>
+<id1000
+	RtName="expected barcodes"
+	RtType="2"
+	RtId="212890192"
+	ValType="257"
+	Connected="0">
+<Obj
+	Type="2"
+	Val="1"
+/>
+</id1000>
+<id1001
+	RtName="timeout"
+	RtType="2"
+	RtId="212890864"
+	ValType="257"
+	Connected="0">
+<Obj
+	Type="2"
+	Val="0"
+/>
+</id1001>
+<id1002
+	RtName="1D Security level"
+	RtType="2"
+	RtId="212891032"
+	ValType="263"
+	Connected="0">
+<Obj
+	Type="3"
+	Val="0"
+/>
+</id1002>
+<id1003
+	RtName="1D Low Contrast"
+	RtType="2"
+	RtId="212892544"
+	ValType="256"
+	Connected="0">
+<Obj
+	Type="1"
+	Val="1"
+/>
+</id1003>
+<id1004
+	RtName="Enhance Contrast"
+	RtType="2"
+	RtId="212891536"
+	ValType="256"
+	Connected="0">
+<Obj
+	Type="1"
+	Val="0"
+/>
+</id1004>
+<id1005
+	RtName="Direct Part Marking Type"
+	RtType="2"
+	RtId="212892376"
+	ValType="263"
+	Connected="0">
+<Obj
+	Type="3"
+	Val="0"
+/>
+</id1005>
+<id1006
+	RtName="Code 39"
+	RtType="2"
+	RtId="212887840"
+	ValType="256"
+	Connected="0">
+<Obj
+	Type="1"
+	Val="1"
+/>
+</id1006>
+<id1007
+	RtName="   checksum"
+	RtType="2"
+	RtId="212890528"
+	ValType="263"
+	Connected="0">
+<Obj
+	Type="3"
+	Val="0"
+/>
+</id1007>
+<id1008
+	RtName="   support full ASCII"
+	RtType="2"
+	RtId="212891368"
+	ValType="256"
+	Connected="0">
+<Obj
+	Type="1"
+	Val="0"
+/>
+</id1008>
+<id1009
+	RtName="Interleaved 2 of 5"
+	RtType="2"
+	RtId="212890696"
+	ValType="256"
+	Connected="0">
+<Obj
+	Type="1"
+	Val="1"
+/>
+</id1009>
+<id1010
+	RtName="   checksum"
+	RtType="2"
+	RtId="212888680"
+	ValType="263"
+	Connected="0">
+<Obj
+	Type="3"
+	Val="0"
+/>
+</id1010>
+<id1011
+	RtName="   string length"
+	RtType="2"
+	RtId="212892712"
+	ValType="257"
+	Connected="0">
+<Obj
+	Type="2"
+	Val="0"
+/>
+</id1011>
+<id1012
+	RtName="Codabar"
+	RtType="2"
+	RtId="212891200"
+	ValType="256"
+	Connected="0">
+<Obj
+	Type="1"
+	Val="1"
+/>
+</id1012>
+<id1013
+	RtName="   checksum"
+	RtType="2"
+	RtId="212891704"
+	ValType="263"
+	Connected="0">
+<Obj
+	Type="3"
+	Val="0"
+/>
+</id1013>
+<id1014
+	RtName="Code 128"
+	RtType="2"
+	RtId="212889184"
+	ValType="256"
+	Connected="0">
+<Obj
+	Type="1"
+	Val="1"
+/>
+</id1014>
+<id1015
+	RtName="Code 93"
+	RtType="2"
+	RtId="212889352"
+	ValType="256"
+	Connected="0">
+<Obj
+	Type="1"
+	Val="0"
+/>
+</id1015>
+<id1016
+	RtName="UPC-A,-E EAN-8,-13"
+	RtType="2"
+	RtId="212888176"
+	ValType="256"
+	Connected="0">
+<Obj
+	Type="1"
+	Val="1"
+/>
+</id1016>
+<id1017
+	RtName="   2/5 digit supplement"
+	RtType="2"
+	RtId="212891872"
+	ValType="256"
+	Connected="0">
+<Obj
+	Type="1"
+	Val="0"
+/>
+</id1017>
+<id1018
+	RtName="   UPC-E Expansion"
+	RtType="2"
+	RtId="212892040"
+	ValType="256"
+	Connected="0">
+<Obj
+	Type="1"
+	Val="0"
+/>
+</id1018>
+<id1019
+	RtName="Code 11"
+	RtType="2"
+	RtId="212888008"
+	ValType="256"
+	Connected="0">
+<Obj
+	Type="1"
+	Val="0"
+/>
+</id1019>
+<id1020
+	RtName="   Strip check char"
+	RtType="2"
+	RtId="212888344"
+	ValType="256"
+	Connected="0">
+<Obj
+	Type="1"
+	Val="0"
+/>
+</id1020>
+<id1021
+	RtName="Code 32"
+	RtType="2"
+	RtId="212888512"
+	ValType="256"
+	Connected="0">
+<Obj
+	Type="1"
+	Val="0"
+/>
+</id1021>
+<id1022
+	RtName="Plessey Code"
+	RtType="2"
+	RtId="212888848"
+	ValType="256"
+	Connected="0">
+<Obj
+	Type="1"
+	Val="0"
+/>
+</id1022>
+<id1023
+	RtName="MSI Plessey"
+	RtType="2"
+	RtId="212889520"
+	ValType="256"
+	Connected="0">
+<Obj
+	Type="1"
+	Val="0"
+/>
+</id1023>
+<id1024
+	RtName="   Checksum"
+	RtType="2"
+	RtId="212889016"
+	ValType="263"
+	Connected="0">
+<Obj
+	Type="3"
+	Val="0"
+/>
+</id1024>
+<id1025
+	RtName="   Strip check char"
+	RtType="2"
+	RtId="212889688"
+	ValType="256"
+	Connected="0">
+<Obj
+	Type="1"
+	Val="0"
+/>
+</id1025>
+<id1026
+	RtName="Telepen"
+	RtType="2"
+	RtId="212894896"
+	ValType="256"
+	Connected="0">
+<Obj
+	Type="1"
+	Val="0"
+/>
+</id1026>
+<id1027
+	RtName="Trioptic"
+	RtType="2"
+	RtId="212895064"
+	ValType="256"
+	Connected="0">
+<Obj
+	Type="1"
+	Val="0"
+/>
+</id1027>
+<id1028
+	RtName="BC412"
+	RtType="2"
+	RtId="212895232"
+	ValType="256"
+	Connected="0">
+<Obj
+	Type="1"
+	Val="1"
+/>
+</id1028>
+<id1029
+	RtName="Pharmacode"
+	RtType="2"
+	RtId="212893552"
+	ValType="256"
+	Connected="0">
+<Obj
+	Type="1"
+	Val="0"
+/>
+</id1029>
+<id1030
+	RtName="   Min # of bars"
+	RtType="2"
+	RtId="212894392"
+	ValType="257"
+	Connected="0">
+<Obj
+	Type="2"
+	Val="4"
+/>
+</id1030>
+<id1031
+	RtName="   Max # of bars"
+	RtType="2"
+	RtId="212893888"
+	ValType="257"
+	Connected="0">
+<Obj
+	Type="2"
+	Val="16"
+/>
+</id1031>
+<id1032
+	RtName="   Min code value"
+	RtType="2"
+	RtId="212895400"
+	ValType="257"
+	Connected="0">
+<Obj
+	Type="2"
+	Val="15"
+/>
+</id1032>
+<id1033
+	RtName="   Max code value"
+	RtType="2"
+	RtId="212893720"
+	ValType="257"
+	Connected="0">
+<Obj
+	Type="2"
+	Val="131070"
+/>
+</id1033>
+<id1034
+	RtName="   Reverse decode"
+	RtType="2"
+	RtId="212894728"
+	ValType="256"
+	Connected="0">
+<Obj
+	Type="1"
+	Val="0"
+/>
+</id1034>
+<id1035
+	RtName="   Allow color bars"
+	RtType="2"
+	RtId="212894560"
+	ValType="256"
+	Connected="0">
+<Obj
+	Type="1"
+	Val="0"
+/>
+</id1035>
+<id1036
+	RtName="USPS Postnet"
+	RtType="2"
+	RtId="212894056"
+	ValType="256"
+	Connected="0">
+<Obj
+	Type="1"
+	Val="0"
+/>
+</id1036>
+<id1037
+	RtName="USPS Planet"
+	RtType="2"
+	RtId="212895568"
+	ValType="256"
+	Connected="0">
+<Obj
+	Type="1"
+	Val="0"
+/>
+</id1037>
+<id1038
+	RtName="USPS Intelligent"
+	RtType="2"
+	RtId="212893048"
+	ValType="256"
+	Connected="0">
+<Obj
+	Type="1"
+	Val="0"
+/>
+</id1038>
+<id1039
+	RtName="UPU"
+	RtType="2"
+	RtId="212893216"
+	ValType="256"
+	Connected="0">
+<Obj
+	Type="1"
+	Val="0"
+/>
+</id1039>
+<id1043
+	RtName="Royal Mail"
+	RtType="2"
+	RtId="212893384"
+	ValType="256"
+	Connected="0">
+<Obj
+	Type="1"
+	Val="0"
+/>
+</id1043>
+<id1045
+	RtName="Canada Post"
+	RtType="2"
+	RtId="212894224"
+	ValType="256"
+	Connected="0">
+<Obj
+	Type="1"
+	Val="0"
+/>
+</id1045>
+<id1046
+	RtName="Straight 2 of 5"
+	RtType="2"
+	RtId="213217312"
+	ValType="256"
+	Connected="0">
+<Obj
+	Type="1"
+	Val="0"
+/>
+</id1046>
+<id1047
+	RtName="IATA 2 of 5"
+	RtType="2"
+	RtId="213217480"
+	ValType="256"
+	Connected="0">
+<Obj
+	Type="1"
+	Val="0"
+/>
+</id1047>
+<id1048
+	RtName="Matrix 2 of 5"
+	RtType="2"
+	RtId="213216304"
+	ValType="256"
+	Connected="0">
+<Obj
+	Type="1"
+	Val="0"
+/>
+</id1048>
+<id1049
+	RtName="NEC 2 of 5"
+	RtType="2"
+	RtId="213217816"
+	ValType="256"
+	Connected="0">
+<Obj
+	Type="1"
+	Val="0"
+/>
+</id1049>
+<id1040
+	RtName="Hong Kong 2 of 5"
+	RtType="2"
+	RtId="213215968"
+	ValType="256"
+	Connected="0">
+<Obj
+	Type="1"
+	Val="0"
+/>
+</id1040>
+<id1051
+	RtName="Checksum for 2 of 5"
+	RtType="2"
+	RtId="213216136"
+	ValType="263"
+	Connected="0">
+<Obj
+	Type="3"
+	Val="0"
+/>
+</id1051>
+<id1052
+	RtName="Code 49"
+	RtType="2"
+	RtId="213216472"
+	ValType="256"
+	Connected="0">
+<Obj
+	Type="1"
+	Val="0"
+/>
+</id1052>
+<id1053
+	RtName="Code 16K"
+	RtType="2"
+	RtId="213217984"
+	ValType="256"
+	Connected="0">
+<Obj
+	Type="1"
+	Val="0"
+/>
+</id1053>
+<id1054
+	RtName="Codablock F"
+	RtType="2"
+	RtId="213217648"
+	ValType="256"
+	Connected="0">
+<Obj
+	Type="1"
+	Val="0"
+/>
+</id1054>
+<id1055
+	RtName="DataBar 14"
+	RtType="2"
+	RtId="213216640"
+	ValType="256"
+	Connected="0">
+<Obj
+	Type="1"
+	Val="0"
+/>
+</id1055>
+<id1056
+	RtName="DataBar 14 Stacked"
+	RtType="2"
+	RtId="213216808"
+	ValType="256"
+	Connected="0">
+<Obj
+	Type="1"
+	Val="0"
+/>
+</id1056>
+<id1057
+	RtName="DataBar Limited"
+	RtType="2"
+	RtId="213216976"
+	ValType="256"
+	Connected="0">
+<Obj
+	Type="1"
+	Val="0"
+/>
+</id1057>
+<id1058
+	RtName="DataBar Expanded"
+	RtType="2"
+	RtId="213217144"
+	ValType="256"
+	Connected="0">
+<Obj
+	Type="1"
+	Val="0"
+/>
+</id1058>
+<id1059
+	RtName="DataBar Expanded Stacked"
+	RtType="2"
+	RtId="213215464"
+	ValType="256"
+	Connected="0">
+<Obj
+	Type="1"
+	Val="0"
+/>
+</id1059>
+<id1060
+	RtName="PDF417"
+	RtType="2"
+	RtId="213215632"
+	ValType="256"
+	Connected="0">
+<Obj
+	Type="1"
+	Val="0"
+/>
+</id1060>
+<id1061
+	RtName="MicroPDF417"
+	RtType="2"
+	RtId="213215800"
+	ValType="256"
+	Connected="0">
+<Obj
+	Type="1"
+	Val="0"
+/>
+</id1061>
+<id1062
+	RtName="Composite (CC-A)"
+	RtType="2"
+	RtId="213210928"
+	ValType="256"
+	Connected="0">
+<Obj
+	Type="1"
+	Val="0"
+/>
+</id1062>
+<id1063
+	RtName="Composite (CC-B)"
+	RtType="2"
+	RtId="213214624"
+	ValType="256"
+	Connected="0">
+<Obj
+	Type="1"
+	Val="0"
+/>
+</id1063>
+<id1064
+	RtName="Composite (CC-C)"
+	RtType="2"
+	RtId="213210256"
+	ValType="256"
+	Connected="0">
+<Obj
+	Type="1"
+	Val="0"
+/>
+</id1064>
+<id1065
+	RtName="Data Matrix"
+	RtType="2"
+	RtId="213212944"
+	ValType="256"
+	Connected="0">
+<Obj
+	Type="1"
+	Val="1"
+/>
+</id1065>
+<id1066
+	RtName="   Polarity"
+	RtType="2"
+	RtId="213213448"
+	ValType="263"
+	Connected="0">
+<Obj
+	Type="3"
+	Val="0"
+/>
+</id1066>
+<id1067
+	RtName="   Mirror"
+	RtType="2"
+	RtId="213213616"
+	ValType="256"
+	Connected="0">
+<Obj
+	Type="1"
+	Val="0"
+/>
+</id1067>
+<id1068
+	RtName="   Rectangular"
+	RtType="2"
+	RtId="213213784"
+	ValType="256"
+	Connected="0">
+<Obj
+	Type="1"
+	Val="1"
+/>
+</id1068>
+<id1069
+	RtName="   Extended"
+	RtType="2"
+	RtId="213214792"
+	ValType="256"
+	Connected="0">
+<Obj
+	Type="1"
+	Val="0"
+/>
+</id1069>
+<id1070
+	RtName="Aztec"
+	RtType="2"
+	RtId="213213112"
+	ValType="256"
+	Connected="0">
+<Obj
+	Type="1"
+	Val="0"
+/>
+</id1070>
+<id1071
+	RtName="   Polarity"
+	RtType="2"
+	RtId="213215296"
+	ValType="263"
+	Connected="0">
+<Obj
+	Type="3"
+	Val="0"
+/>
+</id1071>
+<id1072
+	RtName="   Mirror"
+	RtType="2"
+	RtId="213214960"
+	ValType="256"
+	Connected="0">
+<Obj
+	Type="1"
+	Val="0"
+/>
+</id1072>
+<id1073
+	RtName="QR 2005"
+	RtType="2"
+	RtId="213212608"
+	ValType="256"
+	Connected="0">
+<Obj
+	Type="1"
+	Val="1"
+/>
+</id1073>
+<id1074
+	RtName="Micro QR"
+	RtType="2"
+	RtId="213211096"
+	ValType="256"
+	Connected="0">
+<Obj
+	Type="1"
+	Val="0"
+/>
+</id1074>
+<id1075
+	RtName="QR Polarity"
+	RtType="2"
+	RtId="213211264"
+	ValType="263"
+	Connected="0">
+<Obj
+	Type="3"
+	Val="0"
+/>
+</id1075>
+<id1076
+	RtName="QR Mirror"
+	RtType="2"
+	RtId="213210088"
+	ValType="256"
+	Connected="0">
+<Obj
+	Type="1"
+	Val="0"
+/>
+</id1076>
+<id1077
+	RtName="QR Model 1"
+	RtType="2"
+	RtId="213213280"
+	ValType="256"
+	Connected="0">
+<Obj
+	Type="1"
+	Val="0"
+/>
+</id1077>
+<id1078
+	RtName="Han Xin Code"
+	RtType="2"
+	RtId="213210760"
+	ValType="256"
+	Connected="0">
+<Obj
+	Type="1"
+	Val="0"
+/>
+</id1078>
+<id1079
+	RtName="MaxiCode"
+	RtType="2"
+	RtId="213210424"
+	ValType="256"
+	Connected="0">
+<Obj
+	Type="1"
+	Val="0"
+/>
+</id1079>
+<id1080
+	RtName="Grid Matrix"
+	RtType="2"
+	RtId="213213952"
+	ValType="256"
+	Connected="0">
+<Obj
+	Type="1"
+	Val="0"
+/>
+</id1080>
+<id1081
+	RtName="   Polarity"
+	RtType="2"
+	RtId="213211432"
+	ValType="263"
+	Connected="0">
+<Obj
+	Type="3"
+	Val="0"
+/>
+</id1081>
+<id1082
+	RtName="DPM timeout"
+	RtType="2"
+	RtId="213211600"
+	ValType="257"
+	Connected="0">
+<Obj
+	Type="2"
+	Val="0"
+/>
+</id1082>
+<id1083
+	RtName="Enable"
+	RtType="2"
+	RtId="213210592"
+	ValType="256"
+	Connected="0">
+<Obj
+	Type="1"
+	Val="0"
+/>
+</id1083>
+<id1084
+	RtName="Standard"
+	RtType="2"
+	RtId="213211768"
+	ValType="263"
+	Connected="0">
+<Obj
+	Type="3"
+	Val="0"
+/>
+</id1084>
+<id1085
+	RtName="Data format"
+	RtType="2"
+	RtId="213211936"
+	ValType="263"
+	Connected="0">
+<Obj
+	Type="3"
+	Val="0"
+/>
+</id1085>
+</Params>
+</Algorithm>
+</Algorithms>
+<Proxy
+	RtName="[None]"
+	RtType="7"
+	RtId="212569600"
+	ValType="1028">
+<Obj
+	Type="10">
+<Val
+	HdlType="0"
+/>
+</Obj>
+</Proxy>
+</Instruction>
+<Instruction
+	RtName="End"
+	RtType="5"
+	RtId="212584136"
+	ParentInstr="213089584"
+	InstrType="5"
+	Collapsed="0"
+	ParentSo="213089584"
+/>
+</Instructions>
+<Structure>
+<Branch
+	Parent="0">
+<Children>
+<Child
+	Id="200898280"
+/>
+</Children>
+</Branch>
+<Branch
+	Parent="200898280">
+<Children>
+<Child
+	Id="213089584"
+/>
+</Children>
+</Branch>
+<Branch
+	Parent="213089584">
+<Children>
+<Child
+	Id="212586440"
+/>
+<Child
+	Id="212440584"
+/>
+<Child
+	Id="212584136"
+/>
+</Children>
+</Branch>
+</Structure>
+</Sub>
+</Subroutines>
+<Watched
+/>
+</Investigation>
