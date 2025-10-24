@@ -40,9 +40,15 @@
     <ClCompile Include="LogDlg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SettingDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="LogDlg.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="SettingDlg.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

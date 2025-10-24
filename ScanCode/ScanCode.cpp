@@ -20,35 +20,53 @@
 #include <QAction>
 #include <QDateTime>
 #include <QMessageBox>
-
+#include <QApplication>
+#include <QVBoxLayout>
+#include <QSerialPortInfo>
+#include <QSerialPort>
+#include <QLabel>
+#include <QSettings>
 #include "LogDlg.h"
+#include "SettingDlg.h"
+#include "DHCamera.h"
 ScanCode::ScanCode(QWidget *parent)
     : QMainWindow(parent)
 {
 	initSql();
-	//initCamera();
+	saveLog("软件打开");
+	initConfig();
 	resize(800, 500);
 	QWidget* centralWidget = new QWidget(this);
 	setCentralWidget(centralWidget);
 	// 菜单栏
 	QMenuBar* menuBar = new QMenuBar(this);
 	setMenuBar(menuBar);
-	QMenu* settingMenu = new QMenu("设置", this);
-	menuBar->addMenu(settingMenu);
-	QAction* logMenu = new QAction("日志", this);
+	QAction* settingMenu = new QAction("设置", menuBar);
+	menuBar->addAction(settingMenu);
+	connect(settingMenu, &QAction::triggered, this, &ScanCode::showSettingDlg);
+	QAction* logMenu = new QAction("日志", menuBar);
 	menuBar->addAction(logMenu);
 	connect(logMenu, &QAction::triggered, this, &ScanCode::showLogDlg);
+	QVBoxLayout* layout = new QVBoxLayout(centralWidget);
+	QHBoxLayout* Hlayout = new QHBoxLayout(centralWidget);
 	m_shkWindow = new ShkImageWindow(centralWidget);
-	QString str;
-	m_shkWindow->getCodeString(str);
+	m_cameraWindow = new CameraWindow(centralWidget);
+	m_comPortWindow = new ComPortWindow(centralWidget);
+	Hlayout->addWidget(m_shkWindow);
+	Hlayout->addWidget(m_cameraWindow);
+	layout->addLayout(Hlayout);
+	layout->addWidget(m_comPortWindow);
+	layout->addStretch();
+	centralWidget->setLayout(layout);
+	//QString str;
+	//m_shkWindow->getCodeString(str);
 	//saveLog(str);
 }
 
-//ScanCode::~ScanCode()
-//{
-//	if(m_cameraHandle)
-//		::DHClose(m_cameraHandle);
-//}
+ScanCode::~ScanCode()
+{
+	saveLog("软件关闭");
+}
 
 void ScanCode::showLogDlg()
 {
@@ -57,13 +75,11 @@ void ScanCode::showLogDlg()
 	m_logDlg->show();
 }
 
-void ScanCode::saveLog(QString logContent)
+void ScanCode::showSettingDlg()
 {
-	QDateTime currentTime = QDateTime::currentDateTime();
-	QString time = currentTime.toString("yyyy/MM/dd hh:mm:ss");
-	QString sql = QString("INSERT INTO LOG(TIME,MESSAGE)"
-		"VALUES('%1', '%2')").arg(time).arg(logContent);
-	executeSQL(sql.toStdString());
+	if (!m_settingDlg)
+		m_settingDlg = new SettingDlg(this);
+	m_settingDlg->exec();
 }
 
 void ScanCode::initSql()
@@ -88,23 +104,20 @@ void ScanCode::initSql()
 	executeSQL(sql);
 }
 
-//bool ScanCode::initCamera()
-//{
-//	QString strCameraName = "Camera";
-//	wchar_t* wchar_tCameraName = new wchar_t[strCameraName.length() + 1];
-//	strCameraName.toWCharArray(wchar_tCameraName);
-//	wchar_tCameraName[strCameraName.length()] = L'\0';
-//	m_cameraHandle = ::DHCreate(wchar_tCameraName);
-//	delete[] wchar_tCameraName;
-//	Sleep(100);
-//	if (m_cameraHandle == NULL)
-//	{
-//		QString strErr = QString::fromWCharArray(::DHGetError());
-//		QMessageBox::warning(nullptr, "警告", strErr);
-//		return FALSE;
-//	}
-//	return TRUE;
-//}
+void ScanCode::initConfig()
+{
+	QString filename = "config.ini";
+	QFile file(filename);
+	if (!file.exists()) 
+	{
+		QSettings settings(filename, QSettings::IniFormat);
+		settings.beginGroup("Default");
+		settings.setValue("Machine", "");
+		settings.setValue("ComPort", "");
+		settings.setValue("URL", "");
+		settings.endGroup();
+	}
+}
 
 extern void executeSQL(string sql, vector<pair<string, string>>& logData)
 {
@@ -113,8 +126,6 @@ extern void executeSQL(string sql, vector<pair<string, string>>& logData)
 	int rc;
 	// 打开数据库
 	rc = sqlite3_open("DATA.db", &m_db);
-	if (rc) {
-	}
 	if (sql.substr(0, 6) == "SELECT") 
 	{
 		sqlite3_stmt *stmt;
@@ -127,16 +138,25 @@ extern void executeSQL(string sql, vector<pair<string, string>>& logData)
 		sqlite3_finalize(stmt);
 	}
 	else
-	{
 		rc = sqlite3_exec(m_db, sql.c_str(), 0, 0, &errMessage);
-	}
 	// 关闭数据库连接
 	sqlite3_close(m_db);
 	if (rc != SQLITE_OK) {
+		saveLog(errMessage);
 	}
 }
 
-ShkImageWindow::ShkImageWindow(QWidget *parent /*= Q_NULLPTR*/) : QWidget(parent)
+extern void saveLog(const QString logContent)
+{
+	QDateTime currentTime = QDateTime::currentDateTime();
+	QString time = currentTime.toString("yyyy/MM/dd hh:mm:ss");
+	QString sql = QString("INSERT INTO LOG(TIME,MESSAGE)"
+		"VALUES('%1', '%2')").arg(time).arg(logContent);
+	executeSQL(sql.toStdString());
+}
+
+ShkImageWindow::ShkImageWindow(QWidget *parent /*= Q_NULLPTR*/)
+	: QWidget(parent)
 {
 	::JQSHKInitialize();
 	UINT ss = -1 - JQSHK_SONAME_CHOOSE - JQSHK_MENU_CAMERA_CHOOSE;
@@ -148,6 +168,12 @@ ShkImageWindow::ShkImageWindow(QWidget *parent /*= Q_NULLPTR*/) : QWidget(parent
 	container->setFixedSize(qwindow->width(), qwindow->height());
 	container->show();
 	setFixedSize(container->width(), container->height());
+	QFileInfo file("Code.ivs");
+	QString filePath = file.absoluteFilePath();
+	filePath.replace("/", "\\");
+	auto path = filePath.toStdWString();
+	LPCTSTR lpszFile = path.c_str();
+	::JQSHKLoad(lpszFile);
 }
 
 ShkImageWindow::~ShkImageWindow()
@@ -158,15 +184,113 @@ ShkImageWindow::~ShkImageWindow()
 
 void ShkImageWindow::getCodeString(QString& str)
 {
-	QFileInfo file("Code.ivs");
-	QString filePath = file.absoluteFilePath();
-	filePath.replace("/", "\\");
-	auto path = filePath.toStdWString();
-	LPCTSTR lpszFile = path.c_str();
-	::JQSHKLoad(lpszFile);
 	::JQSHKExecute();
 	LPTSTR lptstr = new TCHAR[255];
 	::JQSHKGetString(_T("code"), lptstr);
 	str = QString::fromWCharArray(lptstr);
 	delete[] lptstr;
+}
+
+CameraWindow::CameraWindow(QWidget *parent /*= Q_NULLPTR*/)
+	: QWidget(parent)
+{
+	QString strCameraName = "Camera";
+	wchar_t* wchar_tCameraName = new wchar_t[strCameraName.length() + 1];
+	strCameraName.toWCharArray(wchar_tCameraName);
+	wchar_tCameraName[strCameraName.length()] = L'\0';
+	m_cameraHandle = ::DHCreate(wchar_tCameraName);
+	delete[] wchar_tCameraName;
+	Sleep(100);
+	if (!m_cameraHandle)
+	{
+		QString strErr = QString::fromWCharArray(::DHGetError());
+		saveLog(strErr);
+		QMessageBox::warning(nullptr, "相机", strErr);
+		return;
+	}
+	HWND cameraWindow = ::DHGetVideoHwnd(m_cameraHandle);
+	QWindow* qwindow = QWindow::fromWinId((WId)cameraWindow);
+	QWidget* container = QWidget::createWindowContainer(qwindow, this);
+	container->setFixedSize(qwindow->width(), qwindow->height());
+	container->show();
+	setFixedSize(container->width(), container->height());
+}
+
+CameraWindow::~CameraWindow()
+{
+	if (m_cameraHandle)
+		::DHClose(m_cameraHandle);
+}
+
+bool CameraWindow::photoGraph()
+{
+	if (!m_cameraHandle)
+		return FALSE;
+	QFileInfo file("photo.jpg");
+	QString filePath = file.absoluteFilePath();
+	filePath.replace("/", "\\");
+	auto path = filePath.toStdWString();
+	LPCTSTR photoPath = path.c_str();
+	if (!::DHSnapImage(m_cameraHandle, photoPath))
+	{
+		QString strMsg = QString::fromWCharArray(::DHGetError());
+		strMsg = "拍照失败：" + strMsg;
+		saveLog(strMsg);
+		QMessageBox::warning(nullptr, "相机", strMsg);
+		return FALSE;
+	}
+	::Sleep(100);
+	return TRUE;
+}
+
+ComPortWindow::ComPortWindow(QWidget *parent /*= Q_NULLPTR*/)
+	: QWidget(parent)
+{
+	QHBoxLayout* codeLayout = new QHBoxLayout(this);
+	QLabel* m_codeTitle = new QLabel("扫码枪数据：",this);
+	m_codeContent = new QLabel(this);
+	codeLayout->addWidget(m_codeTitle);
+	codeLayout->addWidget(m_codeContent);
+	setLayout(codeLayout);
+	codeLayout->addStretch();
+	m_serial = new QSerialPort(this);
+	QSettings settings("config.ini", QSettings::IniFormat);
+	m_serial->setPort(QSerialPortInfo(settings.value("Default/ComPort").toString()));
+	//设置波特率
+		m_serial->setBaudRate(QSerialPort::Baud9600);
+	//设置奇偶校验位
+	m_serial->setParity(QSerialPort::Parity(0));
+	//设置停止位
+	m_serial->setStopBits(QSerialPort::OneStop);
+	if (!m_serial->open(QIODevice::ReadWrite)) 
+	{
+		QString setErr = "串口打开失败";
+		saveLog(setErr);
+		QMessageBox::warning(nullptr, "串口", setErr);
+		return;
+	}
+	connect(m_serial, &QSerialPort::readyRead, this, &ComPortWindow::readComPort);
+	saveLog("串口连接成功");
+}
+
+ComPortWindow::~ComPortWindow()
+{
+	m_serial->close();
+}
+
+void ComPortWindow::readComPort()
+{
+	m_codeFromCom = m_serial->readAll();
+	resolveCode();
+	m_codeContent->setText(m_codeFromCom);
+}
+
+void ComPortWindow::writeComPort(const QByteArray data)
+{
+	m_serial->write(data);
+}
+
+void ComPortWindow::resolveCode()
+{
+
 }

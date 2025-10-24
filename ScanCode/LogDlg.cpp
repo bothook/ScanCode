@@ -12,27 +12,25 @@
 LogDlg::LogDlg(QWidget *parent)
 	: QDialog(parent)
 {
+	setWindowTitle("ÈÕÖ¾");
+	resize(400,250);
+	setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
 	QVBoxLayout* layout = new QVBoxLayout(this);
-	QDateEdit *dateEdit = new QDateEdit(this);
-	dateEdit->setCurrentSection(QDateTimeEdit::DaySection);
-	connect(dateEdit, &QDateEdit::dateChanged, [=](const QDate &date) {
+	m_dateEdit = new QDateEdit(this);
+	m_dateEdit->setMinimumDate(QDate::currentDate().addDays(-10));
+	m_dateEdit->setMaximumDate(QDate::currentDate());
+	connect(m_dateEdit, &QDateEdit::dateChanged, [=](const QDate &date) {
 		showChooseData(date.toString("yyyy/MM/dd"));
 	});
 	m_tableView = new QTableView(this);
 	m_tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
-	m_tableView->verticalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
 	m_tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
 	m_model = new QStandardItemModel(this);
 	m_tableView->setModel(m_model);
-	layout->addWidget(dateEdit);
+	layout->addWidget(m_dateEdit);
 	layout->addWidget(m_tableView);
 	QDate today = QDate::currentDate();
-	dateEdit->setDate(today);
-}
-
-LogDlg::~LogDlg()
-{
-
+	m_dateEdit->setDate(today);
 }
 
 void LogDlg::getLogData(QString date)
@@ -44,9 +42,8 @@ void LogDlg::getLogData(QString date)
 	vector<pair<string, string>> logData;
 	executeSQL(sql.toStdString(), logData);
 	for (int i = 0; i < logData.size(); ++i) 
-	{
-		m_logDataVec.append(qMakePair(QString::fromStdString(logData[i].first), QString::fromStdString(logData[i].second)));
-	}
+		m_logDataVec.append(qMakePair(QString::fromStdString(logData[i].first)
+			, QString::fromStdString(logData[i].second)));
 }
 
 void LogDlg::showChooseData(QString date)
@@ -64,4 +61,9 @@ void LogDlg::showChooseData(QString date)
 		m_model->setItem(row, 0, new QStandardItem(m_logDataVec[row].first));
 		m_model->setItem(row, 1, new QStandardItem(m_logDataVec[row].second));
 	}
+}
+
+void LogDlg::showEvent(QShowEvent *e)
+{
+	showChooseData((m_dateEdit->date().toString("yyyy/MM/dd")));
 }

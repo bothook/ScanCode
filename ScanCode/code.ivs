@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!--  Friday, September 05, 2025 11:36:33  -->
+<!--  Wednesday, September 10, 2025 14:36:01  -->
 
 <Investigation
 	Version="7020707"
@@ -11,7 +11,7 @@
 <Var
 	RtName="count"
 	RtType="1"
-	RtId="213118208"
+	RtId="212523504"
 	ValType="258">
 <Obj
 	Type="3"
@@ -21,7 +21,7 @@
 <Var
 	RtName="code"
 	RtType="1"
-	RtId="213116440"
+	RtId="212522256"
 	ValType="259">
 <Obj
 	Type="4"
@@ -50,34 +50,34 @@
 />
 <FileIoMgr>
 <FileIo
-	RtId="212469120"
+	RtId="211890944"
 />
 <FileIo
-	RtId="212467872"
+	RtId="211889072"
 />
 <FileIo
-	RtId="212466624"
+	RtId="211891256"
 />
 <FileIo
-	RtId="212470368"
+	RtId="211889384"
 />
 <FileIo
-	RtId="212469432"
+	RtId="211891880"
 />
 <FileIo
-	RtId="212467248"
+	RtId="211889696"
 />
 <FileIo
-	RtId="212469744"
+	RtId="211890008"
 />
 <FileIo
-	RtId="212470056"
+	RtId="211892192"
 />
 <FileIo
-	RtId="212466936"
+	RtId="211892504"
 />
 <FileIo
-	RtId="212875360"
+	RtId="212280448"
 />
 </FileIoMgr>
 <SerialIoMgr>
@@ -164,7 +164,7 @@
 <Sub
 	RtName="Main"
 	RtType="5"
-	RtId="200898280"
+	RtId="200830744"
 	ParentInstr="0"
 	InstrType="2"
 	Collapsed="0"
@@ -179,7 +179,7 @@
 <Instruction
 	RtName="imgA"
 	RtType="5"
-	RtId="213089584"
+	RtId="212491240"
 	ParentInstr="0"
 	InstrType="3"
 	Collapsed="0"
@@ -228,7 +228,7 @@
 	AcqTimeoutNoErrSkipExec="0">
 <Inputs>
 <id0
-	RtId="212614984"
+	RtId="212010992"
 	Connected="0">
 <Obj
 	Type="1"
@@ -238,7 +238,7 @@
 </Inputs>
 <Outputs>
 <id0
-	RtId="212940920"
+	RtId="211852632"
 	ConnVar="0"
 	Watch="0"
 	SpcOn="0"
@@ -246,14 +246,14 @@
 	Lmark="0">
 <Obj
 	Type="3"
-	Val="3.7142000198364258"
+	Val="4.1494998931884766"
 />
 <Annot
 	Type="6"
 	X="-1"
 	Y="-1"
 	Clr="0"
-	Text="acq time: 3.71"
+	Text="acq time: 4.15"
 	Display="1"
 	Highlight="0"
 	So="0">
@@ -264,7 +264,7 @@
 </Annot>
 </id0>
 <id1
-	RtId="212096800"
+	RtId="211517216"
 	ConnVar="0"
 	Watch="0"
 	SpcOn="0"
@@ -290,7 +290,7 @@
 </Annot>
 </id1>
 <id2
-	RtId="212097424"
+	RtId="211517840"
 	ConnVar="0"
 	Watch="0"
 	SpcOn="0"
@@ -321,7 +321,7 @@
 <Params
 />
 <ImgSrc
-	File="F:\vsProject\ScanCode\ScanCode\121.jpg"
+	File="F:\vsProject\ScanCode\ScanCode\photo.jpg"
 />
 <Image
 	Width="780"
@@ -331,7 +331,7 @@
 <Proxy
 	RtName="[None]"
 	RtType="7"
-	RtId="212568816"
+	RtId="211971872"
 	ValType="1027">
 <Obj
 	Type="10">
@@ -344,16 +344,16 @@
 <Instruction
 	RtName="Begin"
 	RtType="5"
-	RtId="212586440"
-	ParentInstr="213089584"
+	RtId="211987152"
+	ParentInstr="212491240"
 	InstrType="4"
 	Collapsed="0"
-	ParentSo="213089584"
+	ParentSo="212491240"
 />
 <Instruction
 	RtName="RectA"
 	RtType="5"
-	RtId="212440584"
+	RtId="212582592"
 	ParentInstr="0"
 	InstrType="1"
 	Collapsed="0"
@@ -372,7 +372,7 @@
 	Selected="0"
 	Tolerance="0"
 	Cond="FALSE"
-	RoiSoRtId="213089584"
+	RoiSoRtId="212491240"
 	RoiAlignId="0">
 <Coords
 	Rotation="0"
@@ -397,20 +397,20 @@
 	AlgIndex="0"
 	RtName="algA"
 	RtType="5"
-	RtId="212477432"
-	ParentInstr="212440584"
+	RtId="200627544"
+	ParentInstr="212582592"
 	InstrType="19"
 	Collapsed="0"
 	ProxyHandleRtId="0"
-	SoRtId="212440584"
+	SoRtId="212582592"
 	Tag="code-RectA-algA"
 	ImgProcId="_QuickBarcode_">
 <Inputs
 />
 <Outputs>
 <id500
-	RtId="212098912"
-	ConnVar="213118208"
+	RtId="212583384"
+	ConnVar="212523504"
 	Watch="0"
 	SpcOn="0"
 	Hidden="0"
@@ -435,7 +435,7 @@
 </Annot>
 </id500>
 <id501
-	RtId="213159912"
+	RtId="212584008"
 	ConnVar="0"
 	Watch="0"
 	SpcOn="0"
@@ -461,8 +461,8 @@
 </Annot>
 </id501>
 <id502
-	RtId="213160536"
-	ConnVar="213116440"
+	RtId="212584632"
+	ConnVar="212522256"
 	Watch="0"
 	SpcOn="0"
 	Hidden="0"
@@ -487,7 +487,7 @@
 </Annot>
 </id502>
 <id503
-	RtId="213161160"
+	RtId="212585256"
 	ConnVar="0"
 	Watch="0"
 	SpcOn="0"
@@ -516,7 +516,7 @@
 </Annot>
 </id503>
 <id504
-	RtId="213161784"
+	RtId="212334368"
 	ConnVar="0"
 	Watch="0"
 	SpcOn="0"
@@ -542,7 +542,7 @@
 </Annot>
 </id504>
 <id505
-	RtId="213162408"
+	RtId="212334992"
 	ConnVar="0"
 	Watch="0"
 	SpcOn="0"
@@ -568,7 +568,7 @@
 </Annot>
 </id505>
 <id506
-	RtId="213163032"
+	RtId="212335616"
 	ConnVar="0"
 	Watch="0"
 	SpcOn="0"
@@ -576,14 +576,14 @@
 	Lmark="0">
 <Obj
 	Type="3"
-	Val="2"
+	Val="44"
 />
 <Annot
 	Type="6"
 	X="-1"
 	Y="-1"
 	Clr="0"
-	Text="read time[0]: 2.00"
+	Text="read time[0]: 44.00"
 	Display="1"
 	Highlight="0"
 	So="0">
@@ -594,7 +594,7 @@
 </Annot>
 </id506>
 <id507
-	RtId="213163656"
+	RtId="212336240"
 	ConnVar="0"
 	Watch="0"
 	SpcOn="0"
@@ -620,7 +620,7 @@
 </Annot>
 </id507>
 <id508
-	RtId="213164280"
+	RtId="212336864"
 	ConnVar="0"
 	Watch="0"
 	SpcOn="0"
@@ -646,7 +646,7 @@
 </Annot>
 </id508>
 <id509
-	RtId="213164904"
+	RtId="212337488"
 	ConnVar="0"
 	Watch="0"
 	SpcOn="0"
@@ -672,7 +672,7 @@
 </Annot>
 </id509>
 <id510
-	RtId="213165528"
+	RtId="212338112"
 	ConnVar="0"
 	Watch="0"
 	SpcOn="0"
@@ -698,7 +698,7 @@
 </Annot>
 </id510>
 <id511
-	RtId="213166152"
+	RtId="212338736"
 	ConnVar="0"
 	Watch="0"
 	SpcOn="0"
@@ -724,7 +724,7 @@
 </Annot>
 </id511>
 <id512
-	RtId="213166776"
+	RtId="212339360"
 	ConnVar="0"
 	Watch="0"
 	SpcOn="0"
@@ -750,7 +750,7 @@
 </Annot>
 </id512>
 <id513
-	RtId="213167400"
+	RtId="212586568"
 	ConnVar="0"
 	Watch="0"
 	SpcOn="0"
@@ -776,7 +776,7 @@
 </Annot>
 </id513>
 <id514
-	RtId="213168064"
+	RtId="212590456"
 	ConnVar="0"
 	Watch="0"
 	SpcOn="0"
@@ -794,7 +794,7 @@
 	Text="matrix center[0]: (227.00, 532.00)"
 	Display="1"
 	Highlight="0"
-	So="213089584">
+	So="212491240">
 <Coord
 	Size="2"
 	Value="227,532"
@@ -802,7 +802,7 @@
 </Annot>
 </id514>
 <id515
-	RtId="213173896"
+	RtId="212587864"
 	ConnVar="0"
 	Watch="0"
 	SpcOn="0"
@@ -823,7 +823,7 @@
 	Text="matrix corners[0]: ((67.00, 375.00), ...) [4]"
 	Display="1"
 	Highlight="0"
-	So="213089584">
+	So="212491240">
 <Coord
 	Size="8"
 	Value="67,375,386,373,386,690,69,693"
@@ -831,7 +831,7 @@
 </Annot>
 </id515>
 <id516
-	RtId="213174544"
+	RtId="212585920"
 	ConnVar="0"
 	Watch="0"
 	SpcOn="0"
@@ -857,7 +857,7 @@
 </Annot>
 </id516>
 <id517
-	RtId="213172600"
+	RtId="212591104"
 	ConnVar="0"
 	Watch="0"
 	SpcOn="0"
@@ -883,7 +883,7 @@
 </Annot>
 </id517>
 <id518
-	RtId="213169360"
+	RtId="212591752"
 	ConnVar="0"
 	Watch="0"
 	SpcOn="0"
@@ -909,7 +909,7 @@
 </Annot>
 </id518>
 <id519
-	RtId="213168712"
+	RtId="212592400"
 	ConnVar="0"
 	Watch="0"
 	SpcOn="0"
@@ -935,7 +935,7 @@
 </Annot>
 </id519>
 <id520
-	RtId="213171952"
+	RtId="212588512"
 	ConnVar="0"
 	Watch="0"
 	SpcOn="0"
@@ -961,7 +961,7 @@
 </Annot>
 </id520>
 <id521
-	RtId="213173248"
+	RtId="212593048"
 	ConnVar="0"
 	Watch="0"
 	SpcOn="0"
@@ -987,7 +987,7 @@
 </Annot>
 </id521>
 <id522
-	RtId="213175192"
+	RtId="212589160"
 	ConnVar="0"
 	Watch="0"
 	SpcOn="0"
@@ -1013,7 +1013,7 @@
 </Annot>
 </id522>
 <id523
-	RtId="213170008"
+	RtId="212587216"
 	ConnVar="0"
 	Watch="0"
 	SpcOn="0"
@@ -1039,7 +1039,7 @@
 </Annot>
 </id523>
 <id524
-	RtId="213170656"
+	RtId="212589808"
 	ConnVar="0"
 	Watch="0"
 	SpcOn="0"
@@ -1065,7 +1065,7 @@
 </Annot>
 </id524>
 <id525
-	RtId="213171304"
+	RtId="212609024"
 	ConnVar="0"
 	Watch="0"
 	SpcOn="0"
@@ -1091,7 +1091,7 @@
 </Annot>
 </id525>
 <id526
-	RtId="213181448"
+	RtId="212605136"
 	ConnVar="0"
 	Watch="0"
 	SpcOn="0"
@@ -1117,7 +1117,7 @@
 </Annot>
 </id526>
 <id527
-	RtId="213182096"
+	RtId="212598008"
 	ConnVar="0"
 	Watch="0"
 	SpcOn="0"
@@ -1143,7 +1143,7 @@
 </Annot>
 </id527>
 <id528
-	RtId="213191816"
+	RtId="212607080"
 	ConnVar="0"
 	Watch="0"
 	SpcOn="0"
@@ -1169,7 +1169,7 @@
 </Annot>
 </id528>
 <id529
-	RtId="213191168"
+	RtId="212599304"
 	ConnVar="0"
 	Watch="0"
 	SpcOn="0"
@@ -1195,7 +1195,7 @@
 </Annot>
 </id529>
 <id530
-	RtId="213176264"
+	RtId="212601248"
 	ConnVar="0"
 	Watch="0"
 	SpcOn="0"
@@ -1221,7 +1221,7 @@
 </Annot>
 </id530>
 <id531
-	RtId="213185984"
+	RtId="212609672"
 	ConnVar="0"
 	Watch="0"
 	SpcOn="0"
@@ -1247,7 +1247,7 @@
 </Annot>
 </id531>
 <id532
-	RtId="213186632"
+	RtId="212598656"
 	ConnVar="0"
 	Watch="0"
 	SpcOn="0"
@@ -1273,7 +1273,7 @@
 </Annot>
 </id532>
 <id533
-	RtId="213190520"
+	RtId="212605784"
 	ConnVar="0"
 	Watch="0"
 	SpcOn="0"
@@ -1299,7 +1299,7 @@
 </Annot>
 </id533>
 <id534
-	RtId="213182744"
+	RtId="212599952"
 	ConnVar="0"
 	Watch="0"
 	SpcOn="0"
@@ -1325,7 +1325,7 @@
 </Annot>
 </id534>
 <id601
-	RtId="213178208"
+	RtId="212607728"
 	ConnVar="0"
 	Watch="0"
 	SpcOn="0"
@@ -1354,7 +1354,7 @@
 </Annot>
 </id601>
 <id602
-	RtId="213187928"
+	RtId="212608376"
 	ConnVar="0"
 	Watch="0"
 	SpcOn="0"
@@ -1383,7 +1383,7 @@
 </Annot>
 </id602>
 <id603
-	RtId="213187280"
+	RtId="212603192"
 	ConnVar="0"
 	Watch="0"
 	SpcOn="0"
@@ -1412,7 +1412,7 @@
 </Annot>
 </id603>
 <id604
-	RtId="213183392"
+	RtId="212594120"
 	ConnVar="0"
 	Watch="0"
 	SpcOn="0"
@@ -1441,7 +1441,7 @@
 </Annot>
 </id604>
 <id605
-	RtId="213176912"
+	RtId="212601896"
 	ConnVar="0"
 	Watch="0"
 	SpcOn="0"
@@ -1470,7 +1470,7 @@
 </Annot>
 </id605>
 <id606
-	RtId="213184040"
+	RtId="212604488"
 	ConnVar="0"
 	Watch="0"
 	SpcOn="0"
@@ -1480,7 +1480,7 @@
 	Type="4098">
 <Val
 	Size="1"
-	Value="2"
+	Value="44"
 />
 </Obj>
 <Annot
@@ -1488,7 +1488,7 @@
 	X="-1"
 	Y="-1"
 	Clr="0"
-	Text="read time[]: ((2.00), ...) [1]"
+	Text="read time[]: ((44.00), ...) [1]"
 	Display="1"
 	Highlight="0"
 	So="0">
@@ -1499,7 +1499,7 @@
 </Annot>
 </id606>
 <id607
-	RtId="213189872"
+	RtId="212600600"
 	ConnVar="0"
 	Watch="0"
 	SpcOn="0"
@@ -1528,7 +1528,7 @@
 </Annot>
 </id607>
 <id608
-	RtId="213177560"
+	RtId="212602544"
 	ConnVar="0"
 	Watch="0"
 	SpcOn="0"
@@ -1557,7 +1557,7 @@
 </Annot>
 </id608>
 <id609
-	RtId="213178856"
+	RtId="212603840"
 	ConnVar="0"
 	Watch="0"
 	SpcOn="0"
@@ -1586,7 +1586,7 @@
 </Annot>
 </id609>
 <id610
-	RtId="213184688"
+	RtId="212606432"
 	ConnVar="0"
 	Watch="0"
 	SpcOn="0"
@@ -1615,7 +1615,7 @@
 </Annot>
 </id610>
 <id611
-	RtId="213189224"
+	RtId="212594768"
 	ConnVar="0"
 	Watch="0"
 	SpcOn="0"
@@ -1644,7 +1644,7 @@
 </Annot>
 </id611>
 <id612
-	RtId="213188576"
+	RtId="212595416"
 	ConnVar="0"
 	Watch="0"
 	SpcOn="0"
@@ -1673,7 +1673,7 @@
 </Annot>
 </id612>
 <id613
-	RtId="213179504"
+	RtId="212596064"
 	ConnVar="0"
 	Watch="0"
 	SpcOn="0"
@@ -1702,7 +1702,7 @@
 </Annot>
 </id613>
 <id614
-	RtId="213180152"
+	RtId="212596712"
 	ConnVar="0"
 	Watch="0"
 	SpcOn="0"
@@ -1723,7 +1723,7 @@
 	Text="matrix center[]: ((227.00, 532.00), ...) [1]"
 	Display="1"
 	Highlight="0"
-	So="213089584">
+	So="212491240">
 <Coord
 	Size="2"
 	Value="227,532"
@@ -1731,7 +1731,7 @@
 </Annot>
 </id614>
 <id615
-	RtId="213180800"
+	RtId="212597360"
 	ConnVar="0"
 	Watch="0"
 	SpcOn="0"
@@ -1752,7 +1752,7 @@
 	Text="matrix corners[]: ((67.00, 375.00), ...) [4]"
 	Display="1"
 	Highlight="0"
-	So="213089584">
+	So="212491240">
 <Coord
 	Size="8"
 	Value="67,375,386,373,386,690,69,693"
@@ -1764,7 +1764,7 @@
 <id1000
 	RtName="expected barcodes"
 	RtType="2"
-	RtId="212890192"
+	RtId="212291944"
 	ValType="257"
 	Connected="0">
 <Obj
@@ -1775,7 +1775,7 @@
 <id1001
 	RtName="timeout"
 	RtType="2"
-	RtId="212890864"
+	RtId="212292280"
 	ValType="257"
 	Connected="0">
 <Obj
@@ -1786,7 +1786,7 @@
 <id1002
 	RtName="1D Security level"
 	RtType="2"
-	RtId="212891032"
+	RtId="212291272"
 	ValType="263"
 	Connected="0">
 <Obj
@@ -1797,7 +1797,7 @@
 <id1003
 	RtName="1D Low Contrast"
 	RtType="2"
-	RtId="212892544"
+	RtId="212292448"
 	ValType="256"
 	Connected="0">
 <Obj
@@ -1808,7 +1808,7 @@
 <id1004
 	RtName="Enhance Contrast"
 	RtType="2"
-	RtId="212891536"
+	RtId="212292616"
 	ValType="256"
 	Connected="0">
 <Obj
@@ -1819,7 +1819,7 @@
 <id1005
 	RtName="Direct Part Marking Type"
 	RtType="2"
-	RtId="212892376"
+	RtId="212291440"
 	ValType="263"
 	Connected="0">
 <Obj
@@ -1830,7 +1830,7 @@
 <id1006
 	RtName="Code 39"
 	RtType="2"
-	RtId="212887840"
+	RtId="212291776"
 	ValType="256"
 	Connected="0">
 <Obj
@@ -1841,7 +1841,7 @@
 <id1007
 	RtName="   checksum"
 	RtType="2"
-	RtId="212890528"
+	RtId="212292952"
 	ValType="263"
 	Connected="0">
 <Obj
@@ -1852,7 +1852,7 @@
 <id1008
 	RtName="   support full ASCII"
 	RtType="2"
-	RtId="212891368"
+	RtId="212293120"
 	ValType="256"
 	Connected="0">
 <Obj
@@ -1863,7 +1863,7 @@
 <id1009
 	RtName="Interleaved 2 of 5"
 	RtType="2"
-	RtId="212890696"
+	RtId="212285896"
 	ValType="256"
 	Connected="0">
 <Obj
@@ -1874,7 +1874,7 @@
 <id1010
 	RtName="   checksum"
 	RtType="2"
-	RtId="212888680"
+	RtId="212287408"
 	ValType="263"
 	Connected="0">
 <Obj
@@ -1885,7 +1885,7 @@
 <id1011
 	RtName="   string length"
 	RtType="2"
-	RtId="212892712"
+	RtId="212286736"
 	ValType="257"
 	Connected="0">
 <Obj
@@ -1896,7 +1896,7 @@
 <id1012
 	RtName="Codabar"
 	RtType="2"
-	RtId="212891200"
+	RtId="212289088"
 	ValType="256"
 	Connected="0">
 <Obj
@@ -1907,7 +1907,7 @@
 <id1013
 	RtName="   checksum"
 	RtType="2"
-	RtId="212891704"
+	RtId="212286400"
 	ValType="263"
 	Connected="0">
 <Obj
@@ -1918,7 +1918,7 @@
 <id1014
 	RtName="Code 128"
 	RtType="2"
-	RtId="212889184"
+	RtId="212289928"
 	ValType="256"
 	Connected="0">
 <Obj
@@ -1929,7 +1929,7 @@
 <id1015
 	RtName="Code 93"
 	RtType="2"
-	RtId="212889352"
+	RtId="212288416"
 	ValType="256"
 	Connected="0">
 <Obj
@@ -1940,7 +1940,7 @@
 <id1016
 	RtName="UPC-A,-E EAN-8,-13"
 	RtType="2"
-	RtId="212888176"
+	RtId="212286904"
 	ValType="256"
 	Connected="0">
 <Obj
@@ -1951,7 +1951,7 @@
 <id1017
 	RtName="   2/5 digit supplement"
 	RtType="2"
-	RtId="212891872"
+	RtId="212287744"
 	ValType="256"
 	Connected="0">
 <Obj
@@ -1962,7 +1962,7 @@
 <id1018
 	RtName="   UPC-E Expansion"
 	RtType="2"
-	RtId="212892040"
+	RtId="212287912"
 	ValType="256"
 	Connected="0">
 <Obj
@@ -1973,7 +1973,7 @@
 <id1019
 	RtName="Code 11"
 	RtType="2"
-	RtId="212888008"
+	RtId="212287576"
 	ValType="256"
 	Connected="0">
 <Obj
@@ -1984,7 +1984,7 @@
 <id1020
 	RtName="   Strip check char"
 	RtType="2"
-	RtId="212888344"
+	RtId="212288584"
 	ValType="256"
 	Connected="0">
 <Obj
@@ -1995,7 +1995,7 @@
 <id1021
 	RtName="Code 32"
 	RtType="2"
-	RtId="212888512"
+	RtId="212285560"
 	ValType="256"
 	Connected="0">
 <Obj
@@ -2006,7 +2006,7 @@
 <id1022
 	RtName="Plessey Code"
 	RtType="2"
-	RtId="212888848"
+	RtId="212286568"
 	ValType="256"
 	Connected="0">
 <Obj
@@ -2017,7 +2017,7 @@
 <id1023
 	RtName="MSI Plessey"
 	RtType="2"
-	RtId="212889520"
+	RtId="212289592"
 	ValType="256"
 	Connected="0">
 <Obj
@@ -2028,7 +2028,7 @@
 <id1024
 	RtName="   Checksum"
 	RtType="2"
-	RtId="212889016"
+	RtId="212288752"
 	ValType="263"
 	Connected="0">
 <Obj
@@ -2039,7 +2039,7 @@
 <id1025
 	RtName="   Strip check char"
 	RtType="2"
-	RtId="212889688"
+	RtId="212288080"
 	ValType="256"
 	Connected="0">
 <Obj
@@ -2050,7 +2050,7 @@
 <id1026
 	RtName="Telepen"
 	RtType="2"
-	RtId="212894896"
+	RtId="212290264"
 	ValType="256"
 	Connected="0">
 <Obj
@@ -2061,7 +2061,7 @@
 <id1027
 	RtName="Trioptic"
 	RtType="2"
-	RtId="212895064"
+	RtId="212286064"
 	ValType="256"
 	Connected="0">
 <Obj
@@ -2072,7 +2072,7 @@
 <id1028
 	RtName="BC412"
 	RtType="2"
-	RtId="212895232"
+	RtId="212288248"
 	ValType="256"
 	Connected="0">
 <Obj
@@ -2083,7 +2083,7 @@
 <id1029
 	RtName="Pharmacode"
 	RtType="2"
-	RtId="212893552"
+	RtId="212288920"
 	ValType="256"
 	Connected="0">
 <Obj
@@ -2094,7 +2094,7 @@
 <id1030
 	RtName="   Min # of bars"
 	RtType="2"
-	RtId="212894392"
+	RtId="212287072"
 	ValType="257"
 	Connected="0">
 <Obj
@@ -2105,7 +2105,7 @@
 <id1031
 	RtName="   Max # of bars"
 	RtType="2"
-	RtId="212893888"
+	RtId="212290432"
 	ValType="257"
 	Connected="0">
 <Obj
@@ -2116,7 +2116,7 @@
 <id1032
 	RtName="   Min code value"
 	RtType="2"
-	RtId="212895400"
+	RtId="212287240"
 	ValType="257"
 	Connected="0">
 <Obj
@@ -2127,7 +2127,7 @@
 <id1033
 	RtName="   Max code value"
 	RtType="2"
-	RtId="212893720"
+	RtId="212289256"
 	ValType="257"
 	Connected="0">
 <Obj
@@ -2138,7 +2138,7 @@
 <id1034
 	RtName="   Reverse decode"
 	RtType="2"
-	RtId="212894728"
+	RtId="212289760"
 	ValType="256"
 	Connected="0">
 <Obj
@@ -2149,7 +2149,7 @@
 <id1035
 	RtName="   Allow color bars"
 	RtType="2"
-	RtId="212894560"
+	RtId="212286232"
 	ValType="256"
 	Connected="0">
 <Obj
@@ -2160,7 +2160,7 @@
 <id1036
 	RtName="USPS Postnet"
 	RtType="2"
-	RtId="212894056"
+	RtId="212289424"
 	ValType="256"
 	Connected="0">
 <Obj
@@ -2171,7 +2171,7 @@
 <id1037
 	RtName="USPS Planet"
 	RtType="2"
-	RtId="212895568"
+	RtId="212290096"
 	ValType="256"
 	Connected="0">
 <Obj
@@ -2182,7 +2182,7 @@
 <id1038
 	RtName="USPS Intelligent"
 	RtType="2"
-	RtId="212893048"
+	RtId="212285224"
 	ValType="256"
 	Connected="0">
 <Obj
@@ -2193,7 +2193,7 @@
 <id1039
 	RtName="UPU"
 	RtType="2"
-	RtId="212893216"
+	RtId="212285392"
 	ValType="256"
 	Connected="0">
 <Obj
@@ -2204,7 +2204,7 @@
 <id1043
 	RtName="Royal Mail"
 	RtType="2"
-	RtId="212893384"
+	RtId="212285728"
 	ValType="256"
 	Connected="0">
 <Obj
@@ -2215,7 +2215,7 @@
 <id1045
 	RtName="Canada Post"
 	RtType="2"
-	RtId="212894224"
+	RtId="212624864"
 	ValType="256"
 	Connected="0">
 <Obj
@@ -2226,7 +2226,7 @@
 <id1046
 	RtName="Straight 2 of 5"
 	RtType="2"
-	RtId="213217312"
+	RtId="212625872"
 	ValType="256"
 	Connected="0">
 <Obj
@@ -2237,7 +2237,7 @@
 <id1047
 	RtName="IATA 2 of 5"
 	RtType="2"
-	RtId="213217480"
+	RtId="212626040"
 	ValType="256"
 	Connected="0">
 <Obj
@@ -2248,7 +2248,7 @@
 <id1048
 	RtName="Matrix 2 of 5"
 	RtType="2"
-	RtId="213216304"
+	RtId="212625536"
 	ValType="256"
 	Connected="0">
 <Obj
@@ -2259,7 +2259,7 @@
 <id1049
 	RtName="NEC 2 of 5"
 	RtType="2"
-	RtId="213217816"
+	RtId="212625368"
 	ValType="256"
 	Connected="0">
 <Obj
@@ -2270,7 +2270,7 @@
 <id1040
 	RtName="Hong Kong 2 of 5"
 	RtType="2"
-	RtId="213215968"
+	RtId="212625032"
 	ValType="256"
 	Connected="0">
 <Obj
@@ -2281,7 +2281,7 @@
 <id1051
 	RtName="Checksum for 2 of 5"
 	RtType="2"
-	RtId="213216136"
+	RtId="212626208"
 	ValType="263"
 	Connected="0">
 <Obj
@@ -2292,7 +2292,7 @@
 <id1052
 	RtName="Code 49"
 	RtType="2"
-	RtId="213216472"
+	RtId="212626880"
 	ValType="256"
 	Connected="0">
 <Obj
@@ -2303,7 +2303,7 @@
 <id1053
 	RtName="Code 16K"
 	RtType="2"
-	RtId="213217984"
+	RtId="212624528"
 	ValType="256"
 	Connected="0">
 <Obj
@@ -2314,7 +2314,7 @@
 <id1054
 	RtName="Codablock F"
 	RtType="2"
-	RtId="213217648"
+	RtId="212626376"
 	ValType="256"
 	Connected="0">
 <Obj
@@ -2325,7 +2325,7 @@
 <id1055
 	RtName="DataBar 14"
 	RtType="2"
-	RtId="213216640"
+	RtId="212626544"
 	ValType="256"
 	Connected="0">
 <Obj
@@ -2336,7 +2336,7 @@
 <id1056
 	RtName="DataBar 14 Stacked"
 	RtType="2"
-	RtId="213216808"
+	RtId="212625704"
 	ValType="256"
 	Connected="0">
 <Obj
@@ -2347,7 +2347,7 @@
 <id1057
 	RtName="DataBar Limited"
 	RtType="2"
-	RtId="213216976"
+	RtId="212626712"
 	ValType="256"
 	Connected="0">
 <Obj
@@ -2358,7 +2358,7 @@
 <id1058
 	RtName="DataBar Expanded"
 	RtType="2"
-	RtId="213217144"
+	RtId="212625200"
 	ValType="256"
 	Connected="0">
 <Obj
@@ -2369,7 +2369,7 @@
 <id1059
 	RtName="DataBar Expanded Stacked"
 	RtType="2"
-	RtId="213215464"
+	RtId="212624360"
 	ValType="256"
 	Connected="0">
 <Obj
@@ -2380,7 +2380,7 @@
 <id1060
 	RtName="PDF417"
 	RtType="2"
-	RtId="213215632"
+	RtId="212624696"
 	ValType="256"
 	Connected="0">
 <Obj
@@ -2391,7 +2391,7 @@
 <id1061
 	RtName="MicroPDF417"
 	RtType="2"
-	RtId="213215800"
+	RtId="212619488"
 	ValType="256"
 	Connected="0">
 <Obj
@@ -2402,7 +2402,7 @@
 <id1062
 	RtName="Composite (CC-A)"
 	RtType="2"
-	RtId="213210928"
+	RtId="212623184"
 	ValType="256"
 	Connected="0">
 <Obj
@@ -2413,7 +2413,7 @@
 <id1063
 	RtName="Composite (CC-B)"
 	RtType="2"
-	RtId="213214624"
+	RtId="212618984"
 	ValType="256"
 	Connected="0">
 <Obj
@@ -2424,7 +2424,7 @@
 <id1064
 	RtName="Composite (CC-C)"
 	RtType="2"
-	RtId="213210256"
+	RtId="212619992"
 	ValType="256"
 	Connected="0">
 <Obj
@@ -2435,7 +2435,7 @@
 <id1065
 	RtName="Data Matrix"
 	RtType="2"
-	RtId="213212944"
+	RtId="212624024"
 	ValType="256"
 	Connected="0">
 <Obj
@@ -2446,7 +2446,7 @@
 <id1066
 	RtName="   Polarity"
 	RtType="2"
-	RtId="213213448"
+	RtId="212623352"
 	ValType="263"
 	Connected="0">
 <Obj
@@ -2457,7 +2457,7 @@
 <id1067
 	RtName="   Mirror"
 	RtType="2"
-	RtId="213213616"
+	RtId="212624192"
 	ValType="256"
 	Connected="0">
 <Obj
@@ -2468,7 +2468,7 @@
 <id1068
 	RtName="   Rectangular"
 	RtType="2"
-	RtId="213213784"
+	RtId="212620160"
 	ValType="256"
 	Connected="0">
 <Obj
@@ -2479,7 +2479,7 @@
 <id1069
 	RtName="   Extended"
 	RtType="2"
-	RtId="213214792"
+	RtId="212619152"
 	ValType="256"
 	Connected="0">
 <Obj
@@ -2490,7 +2490,7 @@
 <id1070
 	RtName="Aztec"
 	RtType="2"
-	RtId="213213112"
+	RtId="212622344"
 	ValType="256"
 	Connected="0">
 <Obj
@@ -2501,7 +2501,7 @@
 <id1071
 	RtName="   Polarity"
 	RtType="2"
-	RtId="213215296"
+	RtId="212623520"
 	ValType="263"
 	Connected="0">
 <Obj
@@ -2512,7 +2512,7 @@
 <id1072
 	RtName="   Mirror"
 	RtType="2"
-	RtId="213214960"
+	RtId="212621336"
 	ValType="256"
 	Connected="0">
 <Obj
@@ -2523,7 +2523,7 @@
 <id1073
 	RtName="QR 2005"
 	RtType="2"
-	RtId="213212608"
+	RtId="212622008"
 	ValType="256"
 	Connected="0">
 <Obj
@@ -2534,7 +2534,7 @@
 <id1074
 	RtName="Micro QR"
 	RtType="2"
-	RtId="213211096"
+	RtId="212619656"
 	ValType="256"
 	Connected="0">
 <Obj
@@ -2545,7 +2545,7 @@
 <id1075
 	RtName="QR Polarity"
 	RtType="2"
-	RtId="213211264"
+	RtId="212622512"
 	ValType="263"
 	Connected="0">
 <Obj
@@ -2556,7 +2556,7 @@
 <id1076
 	RtName="QR Mirror"
 	RtType="2"
-	RtId="213210088"
+	RtId="212623688"
 	ValType="256"
 	Connected="0">
 <Obj
@@ -2567,7 +2567,7 @@
 <id1077
 	RtName="QR Model 1"
 	RtType="2"
-	RtId="213213280"
+	RtId="212620328"
 	ValType="256"
 	Connected="0">
 <Obj
@@ -2578,7 +2578,7 @@
 <id1078
 	RtName="Han Xin Code"
 	RtType="2"
-	RtId="213210760"
+	RtId="212621672"
 	ValType="256"
 	Connected="0">
 <Obj
@@ -2589,7 +2589,7 @@
 <id1079
 	RtName="MaxiCode"
 	RtType="2"
-	RtId="213210424"
+	RtId="212619320"
 	ValType="256"
 	Connected="0">
 <Obj
@@ -2600,7 +2600,7 @@
 <id1080
 	RtName="Grid Matrix"
 	RtType="2"
-	RtId="213213952"
+	RtId="212619824"
 	ValType="256"
 	Connected="0">
 <Obj
@@ -2611,7 +2611,7 @@
 <id1081
 	RtName="   Polarity"
 	RtType="2"
-	RtId="213211432"
+	RtId="212620496"
 	ValType="263"
 	Connected="0">
 <Obj
@@ -2622,7 +2622,7 @@
 <id1082
 	RtName="DPM timeout"
 	RtType="2"
-	RtId="213211600"
+	RtId="212620664"
 	ValType="257"
 	Connected="0">
 <Obj
@@ -2633,7 +2633,7 @@
 <id1083
 	RtName="Enable"
 	RtType="2"
-	RtId="213210592"
+	RtId="212620832"
 	ValType="256"
 	Connected="0">
 <Obj
@@ -2644,7 +2644,7 @@
 <id1084
 	RtName="Standard"
 	RtType="2"
-	RtId="213211768"
+	RtId="212622680"
 	ValType="263"
 	Connected="0">
 <Obj
@@ -2655,7 +2655,7 @@
 <id1085
 	RtName="Data format"
 	RtType="2"
-	RtId="213211936"
+	RtId="212623856"
 	ValType="263"
 	Connected="0">
 <Obj
@@ -2669,7 +2669,7 @@
 <Proxy
 	RtName="[None]"
 	RtType="7"
-	RtId="212569600"
+	RtId="211971536"
 	ValType="1028">
 <Obj
 	Type="10">
@@ -2682,11 +2682,11 @@
 <Instruction
 	RtName="End"
 	RtType="5"
-	RtId="212584136"
-	ParentInstr="213089584"
+	RtId="211985616"
+	ParentInstr="212491240"
 	InstrType="5"
 	Collapsed="0"
-	ParentSo="213089584"
+	ParentSo="212491240"
 />
 </Instructions>
 <Structure>
@@ -2694,29 +2694,29 @@
 	Parent="0">
 <Children>
 <Child
-	Id="200898280"
+	Id="200830744"
 />
 </Children>
 </Branch>
 <Branch
-	Parent="200898280">
+	Parent="200830744">
 <Children>
 <Child
-	Id="213089584"
+	Id="212491240"
 />
 </Children>
 </Branch>
 <Branch
-	Parent="213089584">
+	Parent="212491240">
 <Children>
 <Child
-	Id="212586440"
+	Id="211987152"
 />
 <Child
-	Id="212440584"
+	Id="212582592"
 />
 <Child
-	Id="212584136"
+	Id="211985616"
 />
 </Children>
 </Branch>
