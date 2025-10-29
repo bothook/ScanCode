@@ -13,7 +13,7 @@ LogDlg::LogDlg(QWidget *parent)
 	: QDialog(parent)
 {
 	setWindowTitle("ÈÕÖ¾");
-	resize(400,250);
+	resize(500,400);
 	setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
 	QVBoxLayout* layout = new QVBoxLayout(this);
 	m_dateEdit = new QDateEdit(this);
@@ -33,22 +33,30 @@ LogDlg::LogDlg(QWidget *parent)
 	m_dateEdit->setDate(today);
 }
 
+LogDlg::~LogDlg()
+{
+
+}
+
 void LogDlg::getLogData(QString date)
 {
-	m_logDataVec.clear();
+	QVector<QPair<QString, QString>>().swap(m_logDataVec);
 	if (date.isEmpty())
 		return;
 	QString sql = QString("SELECT * FROM LOG WHERE TIME LIKE '%1%'").arg(date);
 	vector<pair<string, string>> logData;
 	executeSQL(sql.toStdString(), logData);
 	for (int i = 0; i < logData.size(); ++i) 
-		m_logDataVec.append(qMakePair(QString::fromStdString(logData[i].first)
+		m_logDataVec.insert(0,qMakePair(QString::fromStdString(logData[i].first)
 			, QString::fromStdString(logData[i].second)));
 }
 
 void LogDlg::showChooseData(QString date)
 {
+	int count = m_logDataVec.size();
 	getLogData(date);
+	if (count == m_logDataVec.size())
+		return;
 	m_model->clear();
 	m_model->setColumnCount(2);
 	m_model->setRowCount(m_logDataVec.size());

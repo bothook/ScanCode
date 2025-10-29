@@ -9,11 +9,11 @@ class LogDlg : public QDialog
 
 public:
 	LogDlg(QWidget *parent = Q_NULLPTR);
-
+	~LogDlg();
 private:
 	void getLogData(QString date);
 	void showChooseData(QString date);
-	void showEvent(QShowEvent *e)override;
+	void showEvent(QShowEvent * e)override;
 private:
 	QVector<QPair<QString, QString>> m_logDataVec;
 	QTableView *m_tableView = nullptr;

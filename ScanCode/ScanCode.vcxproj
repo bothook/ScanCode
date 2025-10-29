@@ -97,7 +97,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CameraDlg.cpp" />
     <ClCompile Include="SettingDlg.cpp" />
+    <ClCompile Include="Thread.cpp" />
     <QtRcc Include="ScanCode.qrc" />
     <QtMoc Include="ScanCode.h" />
     <ClCompile Include="LogDlg.cpp" />
@@ -109,6 +111,12 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="SettingDlg.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="CameraDlg.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="thread.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

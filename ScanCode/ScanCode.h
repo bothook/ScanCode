@@ -2,71 +2,68 @@
 #include <QtWidgets/QMainWindow>
 #pragma execution_character_set("utf-8")
 #include "windows.h"
+#include <algorithm>
 #include <memory>
 using namespace std;
 
-class LogDlg;
 class SettingDlg;
-class ShkImageWindow;
-class CameraWindow;
-class ComPortWindow;
-extern void executeSQL(string sql, vector<pair<string, string>>& logData = *make_shared<vector<pair<string, string>>>());
+class CameraDlg;
+class LogDlg;
+class WorkThread;
+class QSerialPort;
+class QPushButton;
+extern void executeSQL(string sql, vector<pair<string, string>>& logData 
+	= *make_shared<vector<pair<string, string>>>());
 extern void saveLog(const QString logContent);
+typedef HANDLE DHANDLE;
 class ScanCode : public QMainWindow
 {
-    Q_OBJECT
+	Q_OBJECT
 public:
+	friend class WorkThread;
 	ScanCode(QWidget *parent = Q_NULLPTR);
 	~ScanCode();
 private:
-	void showLogDlg();
-	void showSettingDlg();
+	void createMenu(QStringList menuList);
+	void showDlg(int index);
 	void initSql();
-	void initConfig();
-private:
-	LogDlg* m_logDlg = nullptr;
-	SettingDlg* m_settingDlg = nullptr;
-	ShkImageWindow* m_shkWindow = nullptr;
-	CameraWindow* m_cameraWindow = nullptr;
-	ComPortWindow* m_comPortWindow = nullptr;
-};
-
-class ShkImageWindow :public QWidget
-{
-	Q_OBJECT
-public:
-	ShkImageWindow(QWidget *parent = Q_NULLPTR);
-	~ShkImageWindow();
+	void initShk();
+	void initCamera();
+	void initComport();
+protected:
 	void getCodeString(QString& str);
-private:
-};
-typedef HANDLE DHANDLE;
-class CameraWindow : public QWidget
-{
-	Q_OBJECT
-public:
-	CameraWindow(QWidget *parent = Q_NULLPTR);
-	~CameraWindow();
 	bool photoGraph();
+	void read4Com();
+	void write2Com(const QByteArray data);
+	void pushData();
+	void errMess(QString errStr);
 private:
-	DHANDLE m_cameraHandle = nullptr;
+	QMenuBar* m_menuBar = nullptr;
+	HWND m_imgWindow = nullptr;
+	HWND m_camWindow = nullptr;
+	DHANDLE m_camHandle = nullptr;
+	SettingDlg* m_settingDlg = nullptr;
+	CameraDlg* m_cameraDlg = nullptr;
+	LogDlg* m_logDlg = nullptr;
+	WorkThread* m_workthread = nullptr;
+	QPushButton* m_printBtn = nullptr;
+
+	QString m_workOrder;
+	QSerialPort* m_serial = nullptr;
+	QString m_codeFromCom;
 };
 
-class QSerialPort;
-class QLabel;
-class ComPortWindow : public QWidget 
+#include "Thread.h"
+class WorkThread : public Thread 
 {
 	Q_OBJECT
-	//friend class ScanCode;
 public:
-	ComPortWindow(QWidget *parent = Q_NULLPTR);
-	~ComPortWindow();
+	WorkThread(QWidget *parent = Q_NULLPTR)
+		:m_scanCode((ScanCode*)parent), Thread(parent) {
+		connect(this, &WorkThread::errorStr, m_scanCode, &ScanCode::errMess);
+	};
+protected:
+	void process()override;
 private:
-	void readComPort();
-	void writeComPort(const QByteArray data);
-	void resolveCode();
-private:
-	QSerialPort* m_serial = nullptr;
-	QLabel* m_codeContent = nullptr;
-	QString m_codeFromCom;
+	ScanCode* m_scanCode = nullptr;
 };
