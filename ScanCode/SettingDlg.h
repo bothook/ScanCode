@@ -22,7 +22,6 @@ public:
 	~SettingDlg();
 private:
 	void saveConfig();
-	void getConfig(SETTING& setting);
 	void showEvent(QShowEvent * e)override;
 private:
 	QLineEdit* m_machine = nullptr;

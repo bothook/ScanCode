@@ -18,7 +18,6 @@ SettingDlg::SettingDlg(QWidget *parent)
 	setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
 	QVBoxLayout* layout = new QVBoxLayout(this);
 	layout->setContentsMargins(110, 30, 110, 10);
-	getConfig(m_setting);
 	
 	QHBoxLayout* machineLayout = new QHBoxLayout();
 	QLabel* machineTitle = new QLabel("机台号：", this);
@@ -89,6 +88,14 @@ void initConfig()
 		settings.setValue("DelayTime", 0);
 		settings.endGroup();
 	}
+	else
+	{
+		QSettings settings(filename, QSettings::IniFormat);
+		m_setting.machine = settings.value("Default/Machine").toString();
+		m_setting.com = settings.value("Default/ComPort").toInt();
+		m_setting.url = settings.value("Default/Url").toString();
+		m_setting.delay = settings.value("Default/DelayTime").toInt();
+	}
 }
 
 void SettingDlg::saveConfig()
@@ -100,23 +107,14 @@ void SettingDlg::saveConfig()
 	settings.setValue("URL", m_url->text());
 	settings.setValue("DelayTime", m_delayTime->text());
 	settings.endGroup();
-	saveLog(QString("修改机台号为%1,COM为%2,URL为%3,DelayTime为%4")
+	saveLog(QString("修改机台号为：%1,COM为：%2,URL为：%3,DelayTime为：%4")
 		.arg(m_machine->text())
 		.arg(m_port->text())
 		.arg(m_url->text())
 		.arg(m_delayTime->text()));
-	getConfig(m_setting);
+	initConfig();
 	QMessageBox::information(this, "提示", "修改完成");
 	this->hide();
-}
-
-void SettingDlg::getConfig(SETTING& setting)
-{
-	QSettings settings("config.ini", QSettings::IniFormat);
-	setting.machine = settings.value("Default/Machine").toString();
-	setting.com = settings.value("Default/ComPort").toInt();
-	setting.url = settings.value("Default/Url").toString();
-	setting.delay = settings.value("Default/DelayTime").toInt();
 }
 
 void SettingDlg::showEvent(QShowEvent * e)

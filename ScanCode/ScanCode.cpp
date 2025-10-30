@@ -43,7 +43,6 @@ ScanCode::ScanCode(QWidget *parent)
 	initConfig();
 	initShk();
 	initCamera();
-	initComport();
 	m_workthread = new WorkThread(this);
 
 	resize(800, 500);
@@ -84,8 +83,9 @@ ScanCode::ScanCode(QWidget *parent)
 	{
 		if (m_printBtn->text() == "开始打印")
 		{
-			m_workthread->start();
 			m_printBtn->setText("暂停打印");
+			initComport();
+			m_workthread->start();
 			return;
 		}
 		Thread::State state = m_workthread->state();
@@ -222,9 +222,13 @@ void ScanCode::initCamera()
 
 void ScanCode::initComport()
 {
-	m_serial = new QSerialPort(this);
-	QSettings settings("config.ini", QSettings::IniFormat);
-	m_serial->setPort(QSerialPortInfo(settings.value("Default/ComPort").toString()));
+	if (!m_serial) 
+		m_serial = new QSerialPort(this);
+	QString portName = "COM" + QString::number(m_setting.com);
+	if (m_serial->portName() == portName)
+		return;
+	m_serial->close();
+	m_serial->setPort(QSerialPortInfo(portName));
 	//设置波特率
 	m_serial->setBaudRate(QSerialPort::Baud9600);
 	//设置奇偶校验位
@@ -248,6 +252,7 @@ void ScanCode::getCodeString(QString& str)
 	LPTSTR lptstr = new TCHAR[255];
 	::JQSHKGetString(_T("code"), lptstr);
 	str = QString::fromWCharArray(lptstr);
+	saveLog(QString("解码获得数据为：")+str);
 	delete[] lptstr;
 }
 
