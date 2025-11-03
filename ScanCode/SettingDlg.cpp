@@ -9,7 +9,6 @@
 #include <QShowEvent>
 
 
-SETTING m_setting;
 SettingDlg::SettingDlg(QWidget *parent)
 	: QDialog(parent)
 {
@@ -44,7 +43,7 @@ SettingDlg::SettingDlg(QWidget *parent)
 	urlLayout->addStretch();
 
 	QHBoxLayout* delayLayout = new QHBoxLayout();
-	QLabel* delayTitle = new QLabel("每次扫描延时(ms)：", this);
+	QLabel* delayTitle = new QLabel("扫描时长(ms)：", this);
 	m_delayTime = new QLineEdit(this);
 	m_delayTime->setFixedWidth(50);
 	delayLayout->addWidget(delayTitle);

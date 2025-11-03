@@ -9,7 +9,7 @@ class Thread : public QThread
 	Q_OBJECT
 public:
 	Thread(QObject *parent = nullptr);
-	virtual~Thread();
+	~Thread();
 
 	enum State {
 		Stoped,  ///< ֹͣ״̬

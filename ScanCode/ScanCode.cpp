@@ -32,17 +32,55 @@
 #include "SettingDlg.h"
 #include "CameraDlg.h"
 #include "DHCamera.h"
+#include <QTimer>
 #include <QDebug>
 
-SETTING m_settting;
+
+extern void executeSQL(string sql, vector<pair<string, string>>& logData)
+{
+	static sqlite3* m_db;
+	char* errMessage = 0;
+	int rc;
+	// 打开数据库
+	rc = sqlite3_open("DATA.db", &m_db);
+	if (sql.substr(0, 6) == "SELECT")
+	{
+		sqlite3_stmt *stmt;
+		rc = sqlite3_prepare_v2(m_db, sql.c_str(), -1, &stmt, NULL);
+		while (sqlite3_step(stmt) == SQLITE_ROW) {
+			const char *date = (const char*)sqlite3_column_text(stmt, 1);  // 读取第1列（日期）
+			const char *content = (const char*)sqlite3_column_text(stmt, 2);  // 读取第2列（日志内容）
+			logData.push_back(make_pair(date, content));
+		}
+		sqlite3_finalize(stmt);
+	}
+	else
+		rc = sqlite3_exec(m_db, sql.c_str(), 0, 0, &errMessage);
+	// 关闭数据库连接
+	sqlite3_close(m_db);
+	if (rc != SQLITE_OK) {
+		saveLog(errMessage);
+	}
+}
+
+extern void saveLog(const QString logContent)
+{
+	QDateTime currentTime = QDateTime::currentDateTime();
+	QString time = currentTime.toString("yyyy/MM/dd hh:mm:ss");
+	QString sql = QString("INSERT INTO LOG(TIME,MESSAGE)"
+		"VALUES('%1', '%2')").arg(time).arg(logContent);
+	executeSQL(sql.toStdString());
+}
+
+SETTING m_setting;
 ScanCode::ScanCode(QWidget *parent)
     : QMainWindow(parent)
 {
 	saveLog("软件打开");
 	initSql();
 	initConfig();
-	initShk();
-	initCamera();
+	//initShk();
+	//initCamera();
 	m_workthread = new WorkThread(this);
 
 	resize(800, 500);
@@ -81,21 +119,19 @@ ScanCode::ScanCode(QWidget *parent)
 	m_printBtn->setFixedSize(200, 100);
 	connect(m_printBtn, &QPushButton::clicked, [=] 
 	{
-		if (m_printBtn->text() == "开始打印")
+		if (!initComport())
+			return;
+		static bool workThread = false;
+		if (!workThread) 
 		{
-			m_printBtn->setText("暂停打印");
-			initComport();
+			workThread = true;
 			m_workthread->start();
+			m_printBtn->setText("暂停打印");
 			return;
 		}
 		Thread::State state = m_workthread->state();
 		switch (state)
 		{
-		case Thread::Stoped:
-			m_printBtn->setText("暂停打印");
-			m_workOrder = workOrderEdit->text();
-			m_workthread->start();
-			break;
 		case Thread::Running:
 			m_printBtn->setText("恢复打印");
 			m_workthread->pause();
@@ -116,9 +152,11 @@ ScanCode::ScanCode(QWidget *parent)
 
 ScanCode::~ScanCode()
 {
-	::JQSHKSetMode(JQSHK_MODE_HALT);
-	if (::JQSHKIsValid())
+	if (::JQSHKIsValid()) 
+	{
+		::JQSHKSetMode(JQSHK_MODE_HALT);
 		::JQSHKUninitialize();
+	}
 	if (m_camHandle)
 		::DHClose(m_camHandle);
 	if(m_serial)
@@ -181,7 +219,7 @@ void ScanCode::initSql()
 		"SELECT ID FROM LOG "
 		"ORDER BY ID ASC "
 		"LIMIT ( "
-		"SELECT MAX(0, (SELECT COUNT(*) FROM LOG) - 1000) "//满1000条迭代最旧的
+		"SELECT MAX(0, (SELECT COUNT(*) FROM LOG) - 10000) "//满10000条迭代最旧的
 		") "
 		"); "
 		"END;";
@@ -220,13 +258,13 @@ void ScanCode::initCamera()
 	m_camWindow = ::DHGetVideoHwnd(m_camHandle);
 }
 
-void ScanCode::initComport()
+bool ScanCode::initComport()
 {
 	if (!m_serial) 
 		m_serial = new QSerialPort(this);
 	QString portName = "COM" + QString::number(m_setting.com);
-	if (m_serial->portName() == portName)
-		return;
+	if (m_serial->portName() == portName && m_serial->isOpen())
+		return true;
 	m_serial->close();
 	m_serial->setPort(QSerialPortInfo(portName));
 	//设置波特率
@@ -240,23 +278,25 @@ void ScanCode::initComport()
 		QString setErr = "串口打开失败";
 		saveLog(setErr);
 		QMessageBox::warning(nullptr, "串口", setErr);
-		return;
+		return false;
 	}
-	connect(m_serial, &QSerialPort::readyRead, this, &ScanCode::read4Com);
+	m_serial->setRequestToSend(true);
+	connect(m_workthread, &WorkThread::getComInfo, this, &ScanCode::getComInfo);
 	saveLog("串口连接成功");
+	return true;
 }
 
-void ScanCode::getCodeString(QString& str)
+void ScanCode::getCodeString()
 {
 	::JQSHKExecute();
 	LPTSTR lptstr = new TCHAR[255];
 	::JQSHKGetString(_T("code"), lptstr);
-	str = QString::fromWCharArray(lptstr);
-	saveLog(QString("解码获得数据为：")+str);
+	m_codeFromShk = QString::fromWCharArray(lptstr);
+	saveLog(QString("解码获得的数据为：")+ m_codeFromShk);
 	delete[] lptstr;
 }
 
-bool ScanCode::photoGraph()
+void ScanCode::photoGraph()
 {
 	if (!m_camHandle) 
 	{
@@ -275,76 +315,66 @@ bool ScanCode::photoGraph()
 		throw runtime_error(strMsg.toLocal8Bit());
 	}
 	::Sleep(100);
-	return TRUE;
 }
 
 void ScanCode::read4Com()
 {
-	m_codeFromCom = m_serial->readAll();
+	QByteArray buffer = m_serial->readAll();
+	m_codeFromCom = buffer;
+	if (m_codeFromCom.isEmpty()) 
+	{
+		write2Com("-");
+	}
 }
 
-void ScanCode::write2Com(const QByteArray data)
+QString ScanCode::write2Com(const QByteArray data)
 {
-	if (!m_serial)
-		throw runtime_error(QString("串口连接失败").toLocal8Bit());
+	if (!m_serial->isOpen())
+		return QString("串口连接断开");
 	m_serial->write(data);
+	return 0;
 }
 
 void ScanCode::pushData()
 {
-
+	m_setting.machine;
+	m_workOrder;
+	m_codeFromCom;
+	m_codeFromShk;
+	QString err = "系统比对料号准确性";
+	throw runtime_error(err.toLocal8Bit());
 }
 
-void ScanCode::errMess(QString errStr)
+void ScanCode::errMsg(QString errStr)
 {
 	saveLog(errStr);
-	QMessageBox::about(this, "警告", errStr);
-	m_printBtn->setText("开始打印");
+	QMessageBox::information(this, "警告", errStr);
+	m_printBtn->setText("恢复打印");
 }
 
-extern void executeSQL(string sql, vector<pair<string, string>>& logData)
+void ScanCode::getComInfo(QString &errmsg)
 {
-	static sqlite3* m_db;
-	char* errMessage = 0;
-	int rc;
-	// 打开数据库
-	rc = sqlite3_open("DATA.db", &m_db);
-	if (sql.substr(0, 6) == "SELECT") 
-	{
-		sqlite3_stmt *stmt;
-		rc = sqlite3_prepare_v2(m_db, sql.c_str(), -1, &stmt, NULL);
-		while (sqlite3_step(stmt) == SQLITE_ROW) {
-			const char *date = (const char*)sqlite3_column_text(stmt, 1);  // 读取第1列（日期）
-			const char *content = (const char*)sqlite3_column_text(stmt, 2);  // 读取第2列（日志内容）
-			logData.push_back(make_pair(date,content));
-		}
-		sqlite3_finalize(stmt);
-	}
-	else
-		rc = sqlite3_exec(m_db, sql.c_str(), 0, 0, &errMessage);
-	// 关闭数据库连接
-	sqlite3_close(m_db);
-	if (rc != SQLITE_OK) {
-		saveLog(errMessage);
-	}
+	errmsg = write2Com("+");
 }
 
-extern void saveLog(const QString logContent)
+void WorkThread::comWork()
 {
-	QDateTime currentTime = QDateTime::currentDateTime();
-	QString time = currentTime.toString("yyyy/MM/dd hh:mm:ss");
-	QString sql = QString("INSERT INTO LOG(TIME,MESSAGE)"
-		"VALUES('%1', '%2')").arg(time).arg(logContent);
-	executeSQL(sql.toStdString());
+	QString errmsg;
+	emit getComInfo(errmsg);
+	if (!errmsg.isEmpty())
+		throw runtime_error(errmsg.toLocal8Bit());
+	QTimer::singleShot(m_setting.delay, m_scanCode, &ScanCode::read4Com);
+	Sleep(m_setting.delay);
+	if (m_scanCode->m_codeFromCom.isEmpty())
+		throw runtime_error(QString("扫码枪未扫到数据或已断开连接").toLocal8Bit());
 }
 
 void WorkThread::process()
 {
-	if (m_scanCode->photoGraph())
-	{
-		QString str;
-		m_scanCode->getCodeString(str);
-	}
-	m_scanCode->write2Com("123");
-	Sleep(100);
+	m_scanCode->photoGraph();
+	m_scanCode->getCodeString();
+	comWork();
+	m_scanCode->pushData();
 }
+
+

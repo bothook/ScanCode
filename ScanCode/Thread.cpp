@@ -60,14 +60,14 @@ void Thread::run()
 
 		if (stopFlag) break;
 
-		// 执行具体的业务处理
 		try
 		{
+			// 执行具体的业务处理
 			process();
 		}
 		catch (const std::exception& e) 
 		{
-			stop();
+			pause();
 			emit errorStr(QString::fromLocal8Bit(e.what()));
 		}
 	}

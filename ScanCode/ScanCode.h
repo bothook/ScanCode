@@ -29,14 +29,20 @@ private:
 	void initSql();
 	void initShk();
 	void initCamera();
-	void initComport();
+	bool initComport();
 protected:
-	void getCodeString(QString& str);
-	bool photoGraph();
+	void getCodeString();
+	void photoGraph();
 	void read4Com();
-	void write2Com(const QByteArray data);
+	QString write2Com(const QByteArray data);
 	void pushData();
-	void errMess(QString errStr);
+	void errMsg(QString errStr);
+	void getComInfo(QString &errmsg);
+	enum COM
+	{
+		ribbon,
+		label
+	};
 private:
 	QMenuBar* m_menuBar = nullptr;
 	HWND m_imgWindow = nullptr;
@@ -48,22 +54,28 @@ private:
 	WorkThread* m_workthread = nullptr;
 	QPushButton* m_printBtn = nullptr;
 
-	QString m_workOrder;
 	QSerialPort* m_serial = nullptr;
+	QString m_workOrder;
+	QString m_codeFromShk;
 	QString m_codeFromCom;
 };
 
 #include "Thread.h"
+class QTimer;
 class WorkThread : public Thread 
 {
 	Q_OBJECT
 public:
 	WorkThread(QWidget *parent = Q_NULLPTR)
 		:m_scanCode((ScanCode*)parent), Thread(parent) {
-		connect(this, &WorkThread::errorStr, m_scanCode, &ScanCode::errMess);
+		connect(this, &WorkThread::errorStr, m_scanCode, &ScanCode::errMsg);
 	};
 protected:
 	void process()override;
 private:
+	void comWork();
+private:
 	ScanCode* m_scanCode = nullptr;
+signals:
+	void getComInfo(QString &errmsg);
 };
