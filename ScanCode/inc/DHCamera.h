@@ -25,7 +25,6 @@ BOOL WINAPI DHTriggerCompleted(DHANDLE hDH, UINT nTimeout = 0);
 BOOL WINAPI DHTriggerSoftware(DHANDLE hDH);
 HWND WINAPI DHGetVideoHwnd(DHANDLE hDH);
 void WINAPI DHClose(DHANDLE hDH);
-
 #ifdef  __cplusplus
 }
 #endif

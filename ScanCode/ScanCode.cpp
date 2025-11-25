@@ -1,25 +1,34 @@
 #include "ScanCode.h"
-#include "JQSHK2.h"
 
 #include "tchar.h"
 #include "sqlite3.h"
 
+#include "RibbonIntelPaperWsServiceServiceSoapBinding.nsmap"
+
 #if _DEBUG //利用vld测试内存泄漏
 #include "vld.h"
 #pragma comment(lib,"jqshk2.d.lib")
-#pragma comment(lib,"DHCamera.d.lib")
+#pragma comment(lib,"DHCamera3.d.lib")
+#pragma comment(lib,"AzSfWs_Login.d.lib")
 #else
 #pragma comment(lib,"jqshk2.lib")
-#pragma comment(lib,"DHCamera.lib")
+#pragma comment(lib,"DHCamera3.lib")
+#pragma comment(lib,"AzSfWs_Login.lib")
 #endif
 #pragma comment(lib,"sqlite3.lib")
+
+#include "JQSHK2.h"
+#include "LogDlg.h"
+#include "SettingDlg.h"
+#include "CameraDlg.h"
+#include "login.h"
+
 
 #include <QWindow>
 #include <QFileInfo>
 #include <QMenuBar>
 #include <QAction>
 #include <QDateTime>
-#include <QMessageBox>
 #include <QApplication>
 #include <QVBoxLayout>
 #include <QSerialPortInfo>
@@ -27,13 +36,10 @@
 #include <QLabel>
 #include <QSettings>
 #include <QLineEdit>
-#include <QPushButton>
-#include "LogDlg.h"
-#include "SettingDlg.h"
-#include "CameraDlg.h"
-#include "DHCamera.h"
 #include <QTimer>
+
 #include <QDebug>
+
 
 
 extern void executeSQL(string sql, vector<pair<string, string>>& logData)
@@ -76,14 +82,14 @@ SETTING m_setting;
 ScanCode::ScanCode(QWidget *parent)
     : QMainWindow(parent)
 {
-	saveLog("软件打开");
 	initSql();
+	saveLog("软件打开");
 	initConfig();
-	//initShk();
-	//initCamera();
+	initShk();
+	initCamera();
 	m_workthread = new WorkThread(this);
 
-	resize(800, 500);
+	resize(400, 250);
 	QWidget* centralWidget = new QWidget(this);
 	setCentralWidget(centralWidget);
 	// 菜单栏
@@ -100,22 +106,18 @@ ScanCode::ScanCode(QWidget *parent)
 	centralWidget->setLayout(layout);
 	//输入框界面
 	QVBoxLayout* inputLayout = new QVBoxLayout(inputWidget);
-	inputLayout->setContentsMargins(50, 30, 0, 10);
-	QHBoxLayout* workOrderLayout = new QHBoxLayout();
-	QLabel* workOrderTitle = new QLabel("工单号:", inputWidget);
-	QLineEdit* workOrderEdit = new QLineEdit(inputWidget);
-	workOrderEdit->setFixedWidth(150);
-	workOrderLayout->addWidget(workOrderTitle);
-	workOrderLayout->addWidget(workOrderEdit);
-	workOrderLayout->addStretch();
-	inputLayout->addLayout(workOrderLayout);
+	inputLayout->setContentsMargins(50, 30, 50, 10);
+	m_labelPaper = new QLabel("标签料号:", inputWidget);
+	m_ribbonNum = new QLabel("碳带:", inputWidget);
+	inputLayout->addWidget(m_labelPaper);
+	inputLayout->addWidget(m_ribbonNum);
 	inputLayout->addStretch();
 	inputWidget->setLayout(inputLayout);
 	//按钮界面
 	QVBoxLayout* btnLayout = new QVBoxLayout(btnWidget);
 	btnLayout->setContentsMargins(50, 30, 50, 10);
 	QHBoxLayout* printBtnLayout = new QHBoxLayout();
-	m_printBtn = new QPushButton("开始打印", this);
+	m_printBtn = new QPushButton("开始", this);
 	m_printBtn->setFixedSize(200, 100);
 	connect(m_printBtn, &QPushButton::clicked, [=] 
 	{
@@ -126,21 +128,23 @@ ScanCode::ScanCode(QWidget *parent)
 		{
 			workThread = true;
 			m_workthread->start();
-			m_printBtn->setText("暂停打印");
+			m_printBtn->setText("暂停");
 			return;
 		}
 		Thread::State state = m_workthread->state();
 		switch (state)
 		{
 		case Thread::Running:
-			m_printBtn->setText("恢复打印");
+			m_printBtn->setText("恢复");
 			m_workthread->pause();
 			break;
 		case Thread::Paused:
-			m_printBtn->setText("暂停打印");
-			m_workOrder = workOrderEdit->text();
+			m_printBtn->setText("暂停");
 			m_workthread->resume();
 			break;
+		case Thread::Stoped:
+			m_printBtn->setText("暂停");
+			m_workthread->start();
 		}
 	});
 	printBtnLayout->addWidget(m_printBtn);
@@ -152,6 +156,8 @@ ScanCode::ScanCode(QWidget *parent)
 
 ScanCode::~ScanCode()
 {
+	if(m_printBtn->text()=="暂停")
+		m_printBtn->click();
 	if (::JQSHKIsValid()) 
 	{
 		::JQSHKSetMode(JQSHK_MODE_HALT);
@@ -241,13 +247,8 @@ void ScanCode::initShk()
 
 void ScanCode::initCamera()
 {
-	QString strCameraName = "Camera";
-	wchar_t* wchar_tCameraName = new wchar_t[strCameraName.length() + 1];
-	strCameraName.toWCharArray(wchar_tCameraName);
-	wchar_tCameraName[strCameraName.length()] = L'\0';
-	m_camHandle = ::DHCreate(wchar_tCameraName);
+	m_camHandle = ::DHCreate(_T("Camera"));
 	Sleep(100);
-	delete[] wchar_tCameraName;
 	if (!m_camHandle)
 	{
 		QString strErr = QString::fromWCharArray(::DHGetError());
@@ -281,49 +282,55 @@ bool ScanCode::initComport()
 		return false;
 	}
 	m_serial->setRequestToSend(true);
-	connect(m_workthread, &WorkThread::getComInfo, this, &ScanCode::getComInfo);
 	saveLog("串口连接成功");
 	return true;
 }
 
-void ScanCode::getCodeString()
+bool ScanCode::getShkString()
 {
+	photoGraph();
 	::JQSHKExecute();
 	LPTSTR lptstr = new TCHAR[255];
 	::JQSHKGetString(_T("code"), lptstr);
 	m_codeFromShk = QString::fromWCharArray(lptstr);
-	saveLog(QString("解码获得的数据为：")+ m_codeFromShk);
+	static int times = 0;
 	delete[] lptstr;
+	if (m_codeFromShk.isEmpty())
+	{
+		++times;
+		if (times > 2)
+		{
+			times = 0;
+			return false;
+		}
+		return getShkString();
+	}
+	times = 0;
+	return true;
 }
 
 void ScanCode::photoGraph()
 {
-	if (!m_camHandle) 
-	{
+	if (!m_camHandle)
 		throw runtime_error(QString("拍照失败：相机不存在").toLocal8Bit());
-	}
-	QFileInfo file("photo.jpg");
-	QString filePath = file.absoluteFilePath();
-	filePath.replace("/", "\\");
-	auto path = filePath.toStdWString();
-	LPCTSTR photoPath = path.c_str();
-	if (!::DHSnapImage(m_camHandle, photoPath))
+	if(!::DHSnapImage(m_camHandle,_T("Camera.bmp")))
 	{
 		QString strMsg = QString::fromWCharArray(::DHGetError());
 		strMsg = "拍照失败：" + strMsg;
 		saveLog(strMsg);
 		throw runtime_error(strMsg.toLocal8Bit());
 	}
-	::Sleep(100);
 }
 
 void ScanCode::read4Com()
 {
+	m_codeFromCom.clear();
 	QByteArray buffer = m_serial->readAll();
 	m_codeFromCom = buffer;
 	if (m_codeFromCom.isEmpty()) 
 	{
 		write2Com("-");
+		return;
 	}
 }
 
@@ -335,45 +342,122 @@ QString ScanCode::write2Com(const QByteArray data)
 	return 0;
 }
 
+QString ScanCode::getToken()
+{
+	AzSfWs_Login_SetUrl(reinterpret_cast<LPCWSTR>(m_setting.loginUrl.utf16()));
+	AzSfWs_Login_SetTimeout(5000,5000,5000);
+	if (AzSfWs_Login(reinterpret_cast<LPCWSTR>(m_setting.loginAc.utf16()), 
+		reinterpret_cast<LPCWSTR>(m_setting.loginPas.utf16())) != 0)
+	{
+		QString err = QString::fromWCharArray(AzSfWs_Login_GetLastError());
+		throw runtime_error(err.toLocal8Bit());
+	}
+	return QString::fromWCharArray(AzSfWs_Login_Token()).toLocal8Bit();
+}
+
 void ScanCode::pushData()
 {
-	m_setting.machine;
-	m_workOrder;
-	m_codeFromCom;
-	m_codeFromShk;
-	QString err = "系统比对料号准确性";
-	throw runtime_error(err.toLocal8Bit());
+	ns1__ribbonPaperIn ribbonPaperIn;
+	shared_ptr<ns1__ribbonIntelPaperRequest>ribbonIntelPaperRequest(new ns1__ribbonIntelPaperRequest);
+	ribbonPaperIn.ribbonPaperInRequest = ribbonIntelPaperRequest.get();
+
+	QByteArray hostName = m_setting.machine.toUtf8();
+	ribbonIntelPaperRequest->hostname = hostName.data();
+
+	QByteArray labelPaper = m_codeFromCom.toUtf8();
+	ribbonIntelPaperRequest->labelPaper = labelPaper.data();
+
+	QByteArray ribbonNum = m_codeFromShk.toUtf8();
+	ribbonIntelPaperRequest->ribbonNum = ribbonNum.data();
+
+	QByteArray token = getToken().toUtf8();
+	ribbonIntelPaperRequest->token = token.data();
+
+	QByteArray userName = m_setting.loginAc.toUtf8();
+	ribbonIntelPaperRequest->username = userName.data();
+
+	QByteArray tcp = m_setting.url.toUtf8();
+	RibbonIntelPaperWsServiceServiceSoapBindingProxy service(tcp.data(), SOAP_C_UTFSTRING);
+	ns1__ribbonPaperInResponse response;
+	int nResult = service.ribbonPaperIn(&static_cast<ns1__ribbonPaperIn>(ribbonPaperIn), response);
+	if (nResult == SOAP_OK)
+	{
+		QString upLog = QString("上传记录机台名:%1,标签料号:%2,碳带号:%3,登录用户名:%4,url:%5")
+			.arg(m_setting.machine)
+			.arg(m_codeFromCom)
+			.arg(m_codeFromShk)
+			.arg(m_setting.loginAc)
+			.arg(m_setting.url);
+		saveLog(upLog);
+		if (!*response.ribbonPaperInResponse->result) 
+		{
+			QString error_message(response.ribbonPaperInResponse->error_USCOREmessage);
+			throw runtime_error(error_message.toLocal8Bit());
+		}
+	}
+	else 
+	{
+		throw runtime_error(QString("连接服务器失败,错误编号：%1").arg(nResult).toLocal8Bit());
+	}
+}
+
+bool ScanCode::getSignal()
+{
+	ns1__ribbonPaperCheck ribbonPaperCheck;
+	shared_ptr<ns1__ribbonPaperCheckRequest> ribbonPaperCheckRequest(new ns1__ribbonPaperCheckRequest);
+	ribbonPaperCheck.ribbonPaperCheckRequest = ribbonPaperCheckRequest.get();
+	QByteArray hostName = m_setting.printer.toUtf8();
+	ribbonPaperCheckRequest->hostName = hostName.data();
+	QByteArray tcp = m_setting.url.toUtf8();
+	RibbonIntelPaperWsServiceServiceSoapBindingProxy service(tcp.data(), SOAP_C_UTFSTRING);
+	ns1__ribbonPaperCheckResponse response;
+	int nResult = service.ribbonPaperCheck(&static_cast<ns1__ribbonPaperCheck>(ribbonPaperCheck), response);
+	if (nResult == SOAP_OK)
+	{
+		if (!*response.ribbonPaperCheckResponse->result)
+			return false;
+	}
+	else
+	{
+		throw runtime_error(QString("连接服务器失败,错误编号：%1").arg(nResult).toLocal8Bit());
+	}
+	return true;
 }
 
 void ScanCode::errMsg(QString errStr)
 {
 	saveLog(errStr);
 	QMessageBox::information(this, "警告", errStr);
-	m_printBtn->setText("恢复打印");
+	m_printBtn->setText("恢复");
 }
 
-void ScanCode::getComInfo(QString &errmsg)
+void ScanCode::setUIinfo()
 {
-	errmsg = write2Com("+");
+	m_labelPaper->setText("标签料号:" + m_codeFromCom);
+	m_ribbonNum->setText("碳带:" + m_codeFromShk);
 }
 
-void WorkThread::comWork()
+void WorkThread::getComString()
 {
-	QString errmsg;
-	emit getComInfo(errmsg);
-	if (!errmsg.isEmpty())
-		throw runtime_error(errmsg.toLocal8Bit());
+	emit writeComInfo("+");
 	QTimer::singleShot(m_setting.delay, m_scanCode, &ScanCode::read4Com);
-	Sleep(m_setting.delay);
-	if (m_scanCode->m_codeFromCom.isEmpty())
-		throw runtime_error(QString("扫码枪未扫到数据或已断开连接").toLocal8Bit());
+	Sleep(m_setting.delay+100);
 }
 
 void WorkThread::process()
 {
-	m_scanCode->photoGraph();
-	m_scanCode->getCodeString();
-	comWork();
+	if (!m_scanCode->getSignal())
+	{
+		Sleep(1000);
+		return;
+	}
+	bool success = m_scanCode->getShkString();
+	getComString();
+	emit setUIinfo();
+	if (!success)
+		throw runtime_error(QString("二次解码仍未获得数据").toLocal8Bit());
+	if (m_scanCode->m_codeFromCom.isEmpty())
+		throw runtime_error(QString("扫码枪未扫到数据或已断开连接").toLocal8Bit());
 	m_scanCode->pushData();
 }
 

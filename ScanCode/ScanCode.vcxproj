@@ -14,15 +14,18 @@
     <ProjectGuid>{FFB063A4-5252-4D59-850F-10DBE7F66A6F}</ProjectGuid>
     <Keyword>QtVS_v304</Keyword>
     <QtMsBuild Condition="'$(QtMsBuild)'=='' OR !Exists('$(QtMsBuild)\qt.targets')">$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt_defaults.props')">
@@ -53,12 +56,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|Win32'">
-    <IncludePath>$(ProjectDir)inc;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDir)inc;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)soap;$(ProjectDir)inc;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)inc;$(ProjectDir)soap;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|Win32'">
-    <IncludePath>$(ProjectDir)inc;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDir)inc;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)soap;$(ProjectDir)inc;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)inc;$(ProjectDir)soap;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Link>
@@ -87,18 +90,21 @@
     <ClCompile>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <DebugInformationFormat>None</DebugInformationFormat>
-      <Optimization>MaxSpeed</Optimization>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CameraDlg.cpp" />
     <ClCompile Include="SettingDlg.cpp" />
+    <ClCompile Include="soap\soapC.cpp" />
+    <ClCompile Include="soap\soapRibbonIntelPaperWsServiceServiceSoapBindingProxy.cpp" />
+    <ClCompile Include="soap\stdsoap2.cpp" />
     <ClCompile Include="Thread.cpp" />
     <QtRcc Include="ScanCode.qrc" />
     <QtMoc Include="ScanCode.h" />
@@ -117,6 +123,12 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="thread.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="soap\soapH.h" />
+    <ClInclude Include="soap\soapRibbonIntelPaperWsServiceServiceSoapBindingProxy.h" />
+    <ClInclude Include="soap\soapStub.h" />
+    <ClInclude Include="soap\stdsoap2.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
