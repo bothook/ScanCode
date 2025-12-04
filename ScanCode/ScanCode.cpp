@@ -298,8 +298,7 @@ void ScanCode::photoGraph()
 	{
 		QString strMsg = QString::fromWCharArray(::DHGetError());
 		strMsg = "ÅÄÕÕÊ§°Ü£º" + strMsg;
-		saveLog(strMsg);
-		//throw runtime_error(strMsg.toLocal8Bit());
+		throw runtime_error(strMsg.toLocal8Bit());
 	}
 }
 
@@ -309,13 +308,14 @@ void ScanCode::read4Com()
 		return;
 	m_codeFromCom.clear();
 	QByteArray buffer = m_serial->readAll();
-	m_codeFromCom = buffer;
-	m_codeFromCom = m_codeFromCom.left(m_codeFromCom.size() - 2);
-	if (m_codeFromCom.isEmpty()) 
+	if (buffer.isEmpty())
 	{
 		write2Com("-");
 		return;
 	}
+	while (buffer.right(1) == "\r"|| buffer.right(1) == "\n")
+		buffer = buffer.left(buffer.size() - 1);
+	m_codeFromCom = buffer;
 }
 
 QString ScanCode::write2Com(const QByteArray data)
