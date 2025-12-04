@@ -19,12 +19,12 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
@@ -33,12 +33,12 @@
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|Win32'" Label="QtSettings">
     <QtInstall>5.11.1_msvc2015</QtInstall>
-    <QtModules>core;gui;widgets;serialport;</QtModules>
+    <QtModules>core;gui;widgets;serialport;network;</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|Win32'" Label="QtSettings">
     <QtInstall>5.11.1_msvc2015</QtInstall>
-    <QtModules>core;gui;widgets;serialport;</QtModules>
+    <QtModules>core;gui;widgets;serialport;network;</QtModules>
     <QtBuildConfig>release</QtBuildConfig>
   </PropertyGroup>
   <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
@@ -56,22 +56,28 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|Win32'">
-    <IncludePath>$(ProjectDir)soap;$(ProjectDir)inc;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)soap;$(ProjectDir)inc;$(ProjectDir)inc\src;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)inc;$(ProjectDir)soap;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|Win32'">
-    <IncludePath>$(ProjectDir)soap;$(ProjectDir)inc;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)soap;$(ProjectDir)inc;$(ProjectDir)inc\src;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)inc;$(ProjectDir)soap;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Link>
       <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
     </Link>
+    <ClCompile>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Link>
       <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
     </Link>
+    <ClCompile>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|Win32'" Label="Configuration">
     <ClCompile>
@@ -106,7 +112,6 @@
     <ClCompile Include="soap\soapRibbonIntelPaperWsServiceServiceSoapBindingProxy.cpp" />
     <ClCompile Include="soap\stdsoap2.cpp" />
     <ClCompile Include="Thread.cpp" />
-    <QtRcc Include="ScanCode.qrc" />
     <QtMoc Include="ScanCode.h" />
     <ClCompile Include="LogDlg.cpp" />
     <ClCompile Include="ScanCode.cpp" />
@@ -125,10 +130,20 @@
     <QtMoc Include="thread.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="resource.h" />
     <ClInclude Include="soap\soapH.h" />
     <ClInclude Include="soap\soapRibbonIntelPaperWsServiceServiceSoapBindingProxy.h" />
     <ClInclude Include="soap\soapStub.h" />
     <ClInclude Include="soap\stdsoap2.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtRcc Include="ScanCode.qrc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ScanCode.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="scan_.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

@@ -3,21 +3,20 @@
 #include "tchar.h"
 #include "sqlite3.h"
 
+#include "decodeDataMatrix.h"
 #include "RibbonIntelPaperWsServiceServiceSoapBinding.nsmap"
 
 #if _DEBUG //利用vld测试内存泄漏
 #include "vld.h"
-#pragma comment(lib,"jqshk2.d.lib")
 #pragma comment(lib,"DHCamera3.d.lib")
 #pragma comment(lib,"AzSfWs_Login.d.lib")
 #else
-#pragma comment(lib,"jqshk2.lib")
 #pragma comment(lib,"DHCamera3.lib")
 #pragma comment(lib,"AzSfWs_Login.lib")
+#pragma comment(lib,"decodeDataMatrix.lib")
 #endif
 #pragma comment(lib,"sqlite3.lib")
 
-#include "JQSHK2.h"
 #include "LogDlg.h"
 #include "SettingDlg.h"
 #include "CameraDlg.h"
@@ -82,10 +81,20 @@ SETTING m_setting;
 ScanCode::ScanCode(QWidget *parent)
     : QMainWindow(parent)
 {
+	setWindowIcon(QIcon(QPixmap(":/ScanCode/scan_.ico")));
+	m_pSystemTray = new QSystemTrayIcon(this);
+	m_pSystemTray->setIcon(windowIcon());
+	m_pTrayMenu = new QMenu(this);
+	m_exit = new QAction("退出程序", this);
+	m_pTrayMenu->addAction(m_exit);
+	connect(m_exit, SIGNAL(triggered()), qApp, SLOT(quit()));
+	connect(m_pSystemTray, &QSystemTrayIcon::activated, this, &ScanCode::onActivated);
+	m_pSystemTray->setContextMenu(m_pTrayMenu);
+	m_pSystemTray->show();
+
 	initSql();
 	saveLog("软件打开");
 	initConfig();
-	initShk();
 	initCamera();
 	m_workthread = new WorkThread(this);
 
@@ -158,11 +167,6 @@ ScanCode::~ScanCode()
 {
 	if(m_printBtn->text()=="暂停")
 		m_printBtn->click();
-	if (::JQSHKIsValid()) 
-	{
-		::JQSHKSetMode(JQSHK_MODE_HALT);
-		::JQSHKUninitialize();
-	}
 	if (m_camHandle)
 		::DHClose(m_camHandle);
 	if(m_serial)
@@ -232,19 +236,6 @@ void ScanCode::initSql()
 	executeSQL(sql);
 }
 
-void ScanCode::initShk()
-{
-	::JQSHKInitialize();
-	UINT ss = JQSHK_STYLE_DEFAULT - JQSHK_DISABLE_HIDE - JQSHK_SONAME_CHOOSE;
-	m_imgWindow = ::JQSHKGetImageWindow(_T("imgA"), ss);
-	QFileInfo file("Code.ivs");
-	QString filePath = file.absoluteFilePath();
-	filePath.replace("/", "\\");
-	auto path = filePath.toStdWString();
-	LPCTSTR lpszFile = path.c_str();
-	::JQSHKLoad(lpszFile);
-}
-
 void ScanCode::initCamera()
 {
 	m_camHandle = ::DHCreate(_T("Camera"));
@@ -286,26 +277,16 @@ bool ScanCode::initComport()
 	return true;
 }
 
-bool ScanCode::getShkString()
+bool ScanCode::decode()
 {
 	photoGraph();
-	::JQSHKExecute();
-	LPTSTR lptstr = new TCHAR[255];
-	::JQSHKGetString(_T("code"), lptstr);
-	m_codeFromShk = QString::fromWCharArray(lptstr);
-	static int times = 0;
-	delete[] lptstr;
-	if (m_codeFromShk.isEmpty())
+	string value;
+	if (!decodeDataMatrix("Camera.bmp", value, 0.5)) 
 	{
-		++times;
-		if (times > 2)
-		{
-			times = 0;
-			return false;
-		}
-		return getShkString();
+		m_codeFromShk.clear();
+		return false;
 	}
-	times = 0;
+	m_codeFromShk = QString::fromStdString(value);
 	return true;
 }
 
@@ -318,15 +299,18 @@ void ScanCode::photoGraph()
 		QString strMsg = QString::fromWCharArray(::DHGetError());
 		strMsg = "拍照失败：" + strMsg;
 		saveLog(strMsg);
-		throw runtime_error(strMsg.toLocal8Bit());
+		//throw runtime_error(strMsg.toLocal8Bit());
 	}
 }
 
 void ScanCode::read4Com()
 {
+	if (!m_serial || !m_serial->isOpen())
+		return;
 	m_codeFromCom.clear();
 	QByteArray buffer = m_serial->readAll();
 	m_codeFromCom = buffer;
+	m_codeFromCom = m_codeFromCom.left(m_codeFromCom.size() - 2);
 	if (m_codeFromCom.isEmpty()) 
 	{
 		write2Com("-");
@@ -336,7 +320,7 @@ void ScanCode::read4Com()
 
 QString ScanCode::write2Com(const QByteArray data)
 {
-	if (!m_serial->isOpen())
+	if (!m_serial || !m_serial->isOpen())
 		return QString("串口连接断开");
 	m_serial->write(data);
 	return 0;
@@ -350,7 +334,8 @@ QString ScanCode::getToken()
 		reinterpret_cast<LPCWSTR>(m_setting.loginPas.utf16())) != 0)
 	{
 		QString err = QString::fromWCharArray(AzSfWs_Login_GetLastError());
-		throw runtime_error(err.toLocal8Bit());
+		saveLog(err);
+		//throw runtime_error(err.toLocal8Bit());
 	}
 	return QString::fromWCharArray(AzSfWs_Login_Token()).toLocal8Bit();
 }
@@ -361,7 +346,7 @@ void ScanCode::pushData()
 	shared_ptr<ns1__ribbonIntelPaperRequest>ribbonIntelPaperRequest(new ns1__ribbonIntelPaperRequest);
 	ribbonPaperIn.ribbonPaperInRequest = ribbonIntelPaperRequest.get();
 
-	QByteArray hostName = m_setting.machine.toUtf8();
+	QByteArray hostName = m_setting.printer.toUtf8();
 	ribbonIntelPaperRequest->hostname = hostName.data();
 
 	QByteArray labelPaper = m_codeFromCom.toUtf8();
@@ -382,22 +367,24 @@ void ScanCode::pushData()
 	int nResult = service.ribbonPaperIn(&static_cast<ns1__ribbonPaperIn>(ribbonPaperIn), response);
 	if (nResult == SOAP_OK)
 	{
-		QString upLog = QString("上传记录机台名:%1,标签料号:%2,碳带号:%3,登录用户名:%4,url:%5")
-			.arg(m_setting.machine)
+		QString upLog = QString("标签料号:%1,碳带号:%2,登录用户名:%3,url:%4，打印机名称:%5")
 			.arg(m_codeFromCom)
 			.arg(m_codeFromShk)
 			.arg(m_setting.loginAc)
-			.arg(m_setting.url);
+			.arg(m_setting.url)
+			.arg(m_setting.printer);
 		saveLog(upLog);
 		if (!*response.ribbonPaperInResponse->result) 
 		{
 			QString error_message(response.ribbonPaperInResponse->error_USCOREmessage);
-			throw runtime_error(error_message.toLocal8Bit());
+			saveLog(error_message);
+			//throw runtime_error(error_message.toLocal8Bit());
 		}
 	}
 	else 
 	{
-		throw runtime_error(QString("连接服务器失败,错误编号：%1").arg(nResult).toLocal8Bit());
+		saveLog(QString("连接服务器失败,错误编号：%1").arg(nResult));
+		//throw runtime_error(QString("连接服务器失败,错误编号：%1").arg(nResult).toLocal8Bit());
 	}
 }
 
@@ -419,7 +406,8 @@ bool ScanCode::getSignal()
 	}
 	else
 	{
-		throw runtime_error(QString("连接服务器失败,错误编号：%1").arg(nResult).toLocal8Bit());
+		saveLog(QString("连接服务器失败,错误编号：%1").arg(nResult));
+		//throw runtime_error(QString("连接服务器失败,错误编号：%1").arg(nResult).toLocal8Bit());
 	}
 	return true;
 }
@@ -429,6 +417,24 @@ void ScanCode::errMsg(QString errStr)
 	saveLog(errStr);
 	QMessageBox::information(this, "警告", errStr);
 	m_printBtn->setText("恢复");
+}
+
+void ScanCode::onActivated(QSystemTrayIcon::ActivationReason reason)
+{
+	switch (reason)
+	{
+	case QSystemTrayIcon::DoubleClick:
+		show();
+		break;
+	default:
+		break;
+	}
+}
+
+void ScanCode::closeEvent(QCloseEvent* event)
+{
+	hide();
+	event->ignore();
 }
 
 void ScanCode::setUIinfo()
@@ -451,13 +457,21 @@ void WorkThread::process()
 		Sleep(1000);
 		return;
 	}
-	bool success = m_scanCode->getShkString();
+	bool success = m_scanCode->decode();
 	getComString();
 	emit setUIinfo();
 	if (!success)
-		throw runtime_error(QString("二次解码仍未获得数据").toLocal8Bit());
-	if (m_scanCode->m_codeFromCom.isEmpty())
-		throw runtime_error(QString("扫码枪未扫到数据或已断开连接").toLocal8Bit());
+	{
+		//throw runtime_error(QString("解码未获得数据").toLocal8Bit());
+		saveLog("解码未获得数据");
+		return;
+	}
+	else if (m_scanCode->m_codeFromCom.isEmpty()) 
+	{
+		//throw runtime_error(QString("扫码枪未扫到数据或已断开连接").toLocal8Bit());
+		saveLog("扫码枪未扫到数据或已断开连接");
+		return;
+	}
 	m_scanCode->pushData();
 }
 

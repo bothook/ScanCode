@@ -9,7 +9,6 @@ struct SETTING
 	QString loginUrl;
 	QString loginAc;
 	QString loginPas;
-	QString machine;
 	int delay;
 	QString printer;
 };
@@ -27,7 +26,6 @@ private:
 	void saveConfig();
 	void showEvent(QShowEvent * e)override;
 private:
-	QLineEdit* m_machine = nullptr;
 	QLineEdit* m_port = nullptr;
 	QLineEdit* m_url = nullptr;
 	QLineEdit* m_loginUrl = nullptr;

@@ -9,7 +9,8 @@
 #include <memory>
 #include <QPushButton>
 #include <QMessageBox>
-
+#include <QSystemTrayIcon>
+#include <QCloseEvent>
 
 using namespace std;
 
@@ -29,16 +30,15 @@ class ScanCode : public QMainWindow
 public:
 	friend class WorkThread;
 	ScanCode(QWidget *parent = Q_NULLPTR);
-	~ScanCode();
+	~ScanCode(); 
 private:
 	void createMenu(QStringList menuList);
 	void showDlg(int index);
 	void initSql();
-	void initShk();
 	void initCamera();
 	bool initComport();
 protected:
-	bool getShkString();
+	bool decode();
 	void photoGraph();
 	void read4Com();
 	QString write2Com(const QByteArray data);
@@ -49,7 +49,12 @@ protected:
 	bool getSignal();
 
 	void errMsg(QString errStr);
+	void onActivated(QSystemTrayIcon::ActivationReason reason);
+	void closeEvent(QCloseEvent* event)override;
 private:
+	QSystemTrayIcon* m_pSystemTray = nullptr;
+	QMenu* m_pTrayMenu = nullptr;
+	QAction* m_exit = nullptr;
 	QMenuBar* m_menuBar = nullptr;
 	HWND m_imgWindow = nullptr;
 	HWND m_camWindow = nullptr;

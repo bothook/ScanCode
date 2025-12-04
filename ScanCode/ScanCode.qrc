@@ -1,4 +1,5 @@
 <RCC>
-    <qresource prefix="ScanCode">
+    <qresource prefix="/ScanCode">
+        <file>scan_.ico</file>
     </qresource>
 </RCC>

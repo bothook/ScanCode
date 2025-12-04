@@ -15,14 +15,6 @@ SettingDlg::SettingDlg(QWidget *parent)
 	setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
 	QVBoxLayout* layout = new QVBoxLayout(this);
 	layout->setContentsMargins(110, 30, 110, 10);
-	
-	QHBoxLayout* machineLayout = new QHBoxLayout();
-	QLabel* machineTitle = new QLabel("机台号：", this);
-	m_machine = new QLineEdit(this);
-	m_machine->setFixedWidth(75);
-	machineLayout->addWidget(machineTitle);
-	machineLayout->addWidget(m_machine);
-	machineLayout->addStretch();
 
 	QHBoxLayout* printerLayout = new QHBoxLayout();
 	QLabel* printerTitle = new QLabel("电脑名：", this);
@@ -84,9 +76,7 @@ SettingDlg::SettingDlg(QWidget *parent)
 	changeBtn->setFixedWidth(50);
 	connect(changeBtn, &QPushButton::clicked, this, &SettingDlg::saveConfig);
 	changLayuot->addWidget(changeBtn);
-	
-	layout->addLayout(machineLayout);
-	layout->addSpacing(10);
+
 	layout->addLayout(printerLayout);
 	layout->addSpacing(10);
 	layout->addLayout(portLayout);
@@ -129,7 +119,6 @@ void initConfig()
 	else
 	{
 		QSettings settings(filename, QSettings::IniFormat);
-		m_setting.machine = settings.value("Default/Machine").toString();
 		m_setting.com = settings.value("Default/ComPort").toInt();
 		m_setting.url = settings.value("Default/Url").toString();
 		m_setting.loginUrl = settings.value("Default/LoginURL").toString();
@@ -144,7 +133,6 @@ void SettingDlg::saveConfig()
 {
 	QSettings settings("config.ini", QSettings::IniFormat);
 	settings.beginGroup("Default");
-	settings.setValue("Machine", m_machine->text());
 	settings.setValue("ComPort", m_port->text());
 	settings.setValue("URL", m_url->text());
 	settings.setValue("LoginURL", m_loginUrl->text());
@@ -153,8 +141,7 @@ void SettingDlg::saveConfig()
 	settings.setValue("DelayTime", m_delayTime->text());
 	settings.setValue("Printer", m_printerName->text());
 	settings.endGroup();
-	saveLog(QString("修改机台号为：%1,打印机名称: %2,COM为：%3,URL为：%4,登录URL: %5,登录账号: %6,扫描延时为：%7")
-		.arg(m_machine->text())
+	saveLog(QString("修改打印机名称: %1,COM为：%2,URL为：%3,登录URL: %4,登录账号: %5,扫描延时为：%6")
 		.arg(m_printerName->text())
 		.arg(m_port->text())
 		.arg(m_url->text())
@@ -168,7 +155,6 @@ void SettingDlg::saveConfig()
 
 void SettingDlg::showEvent(QShowEvent * e)
 {
-	m_machine->setText(m_setting.machine);
 	m_port->setText(QString::number(m_setting.com));
 	m_url->setText(m_setting.url);
 	m_loginUrl->setText(m_setting.loginUrl);

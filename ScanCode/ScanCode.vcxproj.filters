@@ -23,12 +23,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <QtRcc Include="ScanCode.qrc">
-      <Filter>Resource Files</Filter>
-    </QtRcc>
-    <QtMoc Include="ScanCode.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <ClCompile Include="ScanCode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -72,6 +66,9 @@
     <QtMoc Include="thread.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="ScanCode.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="soap\soapH.h">
@@ -86,5 +83,23 @@
     <ClInclude Include="soap\stdsoap2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <QtRcc Include="ScanCode.qrc">
+      <Filter>Resource Files</Filter>
+    </QtRcc>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ScanCode.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="scan_.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>
